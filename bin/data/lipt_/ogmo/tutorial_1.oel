@@ -1,0 +1,64 @@
+<level background_level="" tutorial_set="TutorialOne" seedValue="1">
+  <width>350</width>
+  <height>350</height>
+  <tiles set="tiles">
+    <tile id="5" x="300" y="0"/>
+    <tile id="5" x="250" y="0"/>
+    <tile id="5" x="200" y="0"/>
+    <tile id="5" x="150" y="0"/>
+    <tile id="5" x="100" y="0"/>
+    <tile id="5" x="50" y="0"/>
+    <tile id="5" x="0" y="0"/>
+    <tile id="5" x="0" y="50"/>
+    <tile id="5" x="50" y="50"/>
+    <tile id="5" x="100" y="50"/>
+    <tile id="5" x="150" y="50"/>
+    <tile id="5" x="200" y="50"/>
+    <tile id="5" x="250" y="50"/>
+    <tile id="5" x="300" y="50"/>
+    <tile id="5" x="350" y="50"/>
+    <tile id="5" x="300" y="100"/>
+    <tile id="5" x="150" y="200"/>
+    <tile id="5" x="100" y="200"/>
+    <tile id="5" x="50" y="150"/>
+    <tile id="5" x="100" y="150"/>
+    <tile id="5" x="150" y="150"/>
+    <tile id="5" x="200" y="150"/>
+    <tile id="5" x="250" y="150"/>
+    <tile id="5" x="300" y="150"/>
+    <tile id="5" x="350" y="100"/>
+    <tile id="5" x="250" y="100"/>
+    <tile id="5" x="200" y="100"/>
+    <tile id="5" x="150" y="100"/>
+    <tile id="5" x="100" y="100"/>
+    <tile id="5" x="50" y="100"/>
+    <tile id="5" x="0" y="100"/>
+    <tile id="5" x="0" y="150"/>
+    <tile id="5" x="0" y="200"/>
+    <tile id="5" x="50" y="200"/>
+    <tile id="5" x="200" y="200"/>
+    <tile id="5" x="250" y="200"/>
+    <tile id="5" x="300" y="200"/>
+    <tile id="5" x="300" y="250"/>
+    <tile id="5" x="250" y="250"/>
+    <tile id="5" x="200" y="250"/>
+    <tile id="5" x="150" y="250"/>
+    <tile id="5" x="100" y="250"/>
+    <tile id="5" x="50" y="250"/>
+    <tile id="5" x="0" y="250"/>
+    <tile id="5" x="200" y="300"/>
+    <tile id="5" x="250" y="300"/>
+    <tile id="5" x="350" y="300"/>
+    <tile id="5" x="300" y="300"/>
+    <tile id="5" x="150" y="300"/>
+    <tile id="5" x="100" y="300"/>
+    <tile id="5" x="50" y="300"/>
+    <tile id="5" x="0" y="300"/>
+  </tiles>
+  <objects>
+    <house x="150" y="100"/>
+    <beet x="150" y="200"/>
+    <beet x="50" y="200"/>
+    <beet x="250" y="200"/>
+  </objects>
+</level>
