@@ -1,9 +1,9 @@
+- setup models in lua so that the screens properly display
+- byte editor should display overlay with all of the possible things
 - edge to edge slide to switch screens
 - add a playhead indicator
-x note editor (up down note, left right octave)
 - two byte editor (FFFF)
 - effect editor (pulls from array of different effect types)
-x one byte editor
 - one byte editor, fix hori - 16 edit
 - edit clear
 - nonedit, one byte for line display
@@ -12,9 +12,12 @@ x one byte editor
 - instrument editor
 - synth implementation
 - physicfs
-- sample loading
 - load some samples by default
 - saving
+
+x sample loading
+x one byte editor
+x note editor (up down note, left right octave)
 
 structure
 - root. contains the core bpm, and name of the project. This is how the samples are looked up.

@@ -25,7 +25,8 @@ SongEditor = class(Group, function(o, root)
 		end
 	end
 
-	o.toChain = Button(bludG.camera.w-40, 0, 40, 40)
+	o.toChain = RoundedButton(bludG.camera.w-80, 0, 80, 80, "C")
+	o.toChain.scrollFactor = Vec2(0,0)
 	o.toChain.onPress = function()
 		-- this should be some type of wrapper state at some point. lets keep it raw for now though
 		mainState:remove(mainState.edit)
@@ -41,7 +42,7 @@ function SongEditor:update()
 		-- show the phrase button
 		self:add(self.toChain)
 		self.showingPhrase = true
-	elseif self.showingPhrase then
+	elseif self.showingPhrase and ( not self.editControl.currentEdit or not self.editControl.currentEdit.hasVal ) then
 		self:remove(self.toChain)
 		self.showingPhrase = false
 	end

@@ -48,6 +48,19 @@ vgridSize = 50
 hgridSize = 50
 dofile(blud.bundle_root .. "/lipt_/imports.lua")
 
+includeOsc = true
+if oscRec == nil and includeOsc then
+  oscRec = Receiver();
+  oscSender = bludOsc();
+  oscSender:setup("localhost", 9002)
+  oscPrint = function(s)
+    local m = bludOscMessage();
+    m:setAddress("/print")
+    m:addStringArg(s)
+    oscSender:sendMessage(m)
+  end
+end
+
 print("imports load time: ", os.time() - loadStart)
 
 -- we need to customize the sprites on importing, so they can't come frome the import list
@@ -103,6 +116,9 @@ function blud.update(t)
   mainState:update();
   bludG:update(t);
   particles:update()
+  if oscRec then
+    oscRec:update();
+  end
 end
 
 function blud.touch.down(x, y, id)

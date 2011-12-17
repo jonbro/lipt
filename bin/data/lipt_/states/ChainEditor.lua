@@ -3,7 +3,7 @@ local numPositions = 16
 ChainEditor = class(Group, function(o, root, chainNum)
 	Group.init(o)
 	o.editors = Group()
-	o:add(EditArea(o.editors))
+	o.editControl = o:add(EditArea(o.editors))
 	o:add(o.editors)
 	o.chainNum = chainNum
 	o.chain = song:getChain(chainNum)  -- gets a chain
@@ -27,15 +27,18 @@ ChainEditor = class(Group, function(o, root, chainNum)
 			end
 		end
 	end
-	o.toPhrase = Button(bludG.camera.w-40, 0, 40, 40)
+	o.toPhrase = RoundedButton(bludG.camera.w-80, 0, 80, 80, "P")
+	o.toPhrase.scrollFactor = Vec2(0,0)	
 	o.toPhrase.onPress = function()
 		-- this should be some type of wrapper state at some point. lets keep it raw for now though
 		mainState:remove(mainState.edit)
 		-- extract the chain value, and switch to the chain editor
-		mainState.edit = mainState:add(PhraseEditor(o.root, o.editControl.currentEdit.value))
+		mainState.edit = mainState:add(PhraseEditor(o.root, o.editControl.currentEdit.value, o.chainNum))
 	end
 	o.showingPhrase = false
-	o.toSong = o:add(Button(0,0,40,40))
+
+	o.toSong = o:add(RoundedButton(0,0,80,80, "S"))
+	o.toSong.scrollFactor = Vec2(0,0)
 	o.toSong.onPress = function()
 		-- this should be some type of wrapper state at some point. lets keep it raw for now though
 		mainState:remove(mainState.edit)
@@ -50,7 +53,7 @@ function ChainEditor:update()
 		-- show the phrase button
 		self:add(self.toPhrase)
 		self.showingPhrase = true
-	elseif self.showingPhrase then
+	elseif self.showingPhrase and ( not self.editControl.currentEdit or not self.editControl.currentEdit.hasVal ) then
 		self:remove(self.toPhrase)
 		self.showingPhrase = false
 	end

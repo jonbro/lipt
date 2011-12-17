@@ -34,7 +34,9 @@ do
     "states/ChainEditor",
 
     "Tweener",
-    "SoundBank"}
+    "SoundBank",
+    "oscHooks"
+    }
   for i, v in ipairs(filesToImport) do
     dofile(blud.bundle_root .. "/lipt_/".. v ..".lua")
   end

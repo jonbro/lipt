@@ -29,7 +29,7 @@ PlayState = class(Group, function(o)
       -- move the camera by however much the user scrolled 
       bludG.camera.scroll:sub(p)
     else
-      o.edit:changeValue(p)
+      o.edit.editControl:changeValue(p)
     end
   end
 
