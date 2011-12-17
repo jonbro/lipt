@@ -29,6 +29,7 @@ do
 
     "models/SongModel",
     "models/ChainModel",
+    "models/PhraseModel",
 
     "states/PlayState",
     "states/EditArea",

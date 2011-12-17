@@ -53,7 +53,12 @@ function NoteEditor:setPosition(x, y)
 	Object.setPosition(self, x, y)
 	self.string:setPosition(x, y)
 end
-
+function NoteEditor:setValue(newValue)
+	self.value = newValue%12
+	self.octave = math.floor(newValue/12);
+	self.string:setValue(notes[math.min(12, math.floor(self.value))] .. tostring(self.octave-1))
+	self.w, self.h = self.string.w, self.string.h	
+end
 -- calculate the value based on the octave and value
 function NoteEditor:getValue()
 	return math.min(128, math.max(1, 60 + (math.floor(self.octave)-4)*12 + math.floor(self.value)))

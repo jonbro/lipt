@@ -17,9 +17,17 @@ PhraseEditor = class(Group, function(o, root, phraseNum, fromChain)
     local nedit = o.editors:add(NoteEditor(0,(y-1)*s.h, o.root))
     o.notes:add(nedit)
     local insEdit = o.editors:add(ByteEditor(nedit.w+padding, nedit.pos.y, o.root))
+
     nedit:setColor(0,0,0,255)
+    if o.phrase.steps[y-1].hasNote then
+      nedit:setValue(o.phrase.steps[y-1].note)
+    end
     nedit.onChange = function(newVal)
-      o.phrase:set(y-1, newVal, 0)
+      if insEdit.hasVal then
+        o.phrase:set(y-1, newVal, insEdit:getValue())
+      else
+        o.phrase:set(y-1, newVal, 0)
+      end
     end
   end
 

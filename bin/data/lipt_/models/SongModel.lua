@@ -16,6 +16,12 @@ LSongModel = class(function(o, songData)
 		o.chains[i] = LChainModel(o.songData:getChain(i))
 	end
 
+	-- setup the phrases
+	o.phrases = {}
+	for i=0,numDatas-1 do
+		o.phrases[i] = LPhraseModel(o.songData:getPhrase(i))
+	end
+
 end)
 
 function LSongModel:setChain(position, channel, value)
@@ -29,7 +35,7 @@ function LSongModel:getChain(value)
 end
 function LSongModel:getPhrase(value)
 	-- this should return the LPhraseModel at some point
-	return self.songData:getPhrase(value)
+	return self.phrases[math.floor(value)]
 end
 function LSongModel:getInstrument(value)
 	-- this should return the LInstrumentModel at some point
