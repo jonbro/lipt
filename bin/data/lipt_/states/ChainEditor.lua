@@ -22,6 +22,9 @@ ChainEditor = class(Group, function(o, root, chainNum)
 			-- move over by one to account for the position indicator
 			local e = o.editors:add(ByteEditor(size.x*(i+1), size.y*j, o.root))
 			-- should link these into the non existant data model somehow
+			if o.chain.steps[j].hasPhrase then
+				e:setValue(o.chain.steps[j].phrase)
+			end
 			e.onChange = function(newVal)
 				o.chain:set(j, newVal, 0)      -- set chain to phrase and transpose at position
 			end
@@ -33,7 +36,7 @@ ChainEditor = class(Group, function(o, root, chainNum)
 		-- this should be some type of wrapper state at some point. lets keep it raw for now though
 		mainState:remove(mainState.edit)
 		-- extract the chain value, and switch to the chain editor
-		mainState.edit = mainState:add(PhraseEditor(o.root, o.editControl.currentEdit.value, o.chainNum))
+		mainState.edit = mainState:add(PhraseEditor(o.root, o.editControl.currentEdit:getValue(), o.chainNum))
 	end
 	o.showingPhrase = false
 

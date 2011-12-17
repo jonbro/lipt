@@ -20,11 +20,7 @@ function ByteEditor:changeValue(vec)
 
 	if math.floor(newvalue) ~= math.floor(self.value) then
 		-- prepend a 0
-		if #dtoh(math.floor(newvalue)) == 1 then
-			self.string:setValue("0" .. dtoh(math.floor(newvalue)))
-		else
-			self.string:setValue(dtoh(math.floor(newvalue)))
-		end
+		self.string:setValue(dtoh(math.floor(newvalue)))
 		self.w, self.h = self.string.w, self.string.h
 		if self.onChange then
 			self.onChange(math.floor(newvalue))
@@ -38,4 +34,11 @@ end
 -- calculate the value based on the octave and value
 function ByteEditor:getValue()
 	return math.floor(self.value)
+end
+
+function ByteEditor:setValue(value)
+	self.value = value
+	self.hasVal = true
+	self.string:setValue(dtoh(math.floor(self.value)))
+	self.w, self.h = self.string.w, self.string.h
 end

@@ -1,6 +1,8 @@
+dofile(blud.bundle_root .. "/lipt_/imports.lua")
+
 -- this is just a defaulty thing to make things easy on me
 player = tPlayer()
-song = SongModel()         -- contains all of the song data. This is a more lua-y object
+song = LSongModel(SongModel())         -- contains all of the song data. This is a more lua-y object
 
 function dtoh(IN)
     local oi = IN
@@ -46,7 +48,6 @@ pd = bludPd();
 
 vgridSize = 50
 hgridSize = 50
-dofile(blud.bundle_root .. "/lipt_/imports.lua")
 
 includeOsc = true
 if oscRec == nil and includeOsc then

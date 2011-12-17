@@ -81,10 +81,15 @@ void Player::moveToNextPhrase(int channel,int hop){
     bool canContinue = (pos < 16);
     if(canContinue){
         canContinue = chain.hasPhrase[pos];
+        cout << "has phrase for pos:" << pos << " " << canContinue << endl;
     }
     if(canContinue){
         // if we can still continue, then we need to move the chain forward
         chainStep[channel] = pos;
+        // set the new phrase
+        currentPhrase[channel] = chain.phrase[pos];
+        // set the phrase step back to the beginning    
+        phraseStep[channel] = 0;
     }else{
         // if not, we need to move the song forward
         moveToNextChain(channel, hop);
@@ -96,9 +101,11 @@ void Player::moveToNextChain(int channel,int hop){
     
     int pos=songStep[channel]+1 ;
     bool loopBack = !song->channel[channel].hasChain[pos];
+    cout << "channel: " << channel << " in pos: " << pos << " has chain: " << (song->channel[channel].hasChain[pos]?"true":"false") << endl;
     if (!loopBack) {
         // if we don't need to loop back, do a double check to make sure that the next chain has a phrase in the first position
         loopBack = !song->chain[song->channel[channel].chain[pos]].hasPhrase[0];
+        cout << "found chain in pos: " << pos << "has phrase? " << !loopBack << endl;
     };
     
     // if we still need to loopback
@@ -122,6 +129,7 @@ void Player::moveToNextChain(int channel,int hop){
     // also set the chain and phrase to the first positions
     phraseStep[channel] = 0;
     chainStep[channel] = 0;
+    startChan(channel, pos);
 }
 
 void Player::setSong(SongModel *s){

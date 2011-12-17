@@ -19,8 +19,12 @@ SongEditor = class(Group, function(o, root)
 		for i=0,numChannels-1 do
 			-- move over by one to account for the position indicator
 			local e = o.editors:add(ByteEditor(size.x*(i+1), size.y*j, o.root))
+			-- set the value from the song data
+			if song.channels[i][j].hasChain then
+				e:setValue(song.channels[i][j].chain)
+			end
 			e.onChange = function(newVal)
-				song:setChain(i, j, newVal)
+				song:setChain(j, i, newVal)
 			end
 		end
 	end
@@ -31,7 +35,8 @@ SongEditor = class(Group, function(o, root)
 		-- this should be some type of wrapper state at some point. lets keep it raw for now though
 		mainState:remove(mainState.edit)
 		-- extract the chain value, and switch to the chain editor
-		mainState.edit = mainState:add(ChainEditor(o.root, o.editControl.currentEdit.value))
+		print("loading chain num", o.editControl.currentEdit.value)
+		mainState.edit = mainState:add(ChainEditor(o.root, o.editControl.currentEdit:getValue()))
 	end
 	o.showingPhrase = false
 end)

@@ -27,6 +27,9 @@ do
     "profiler",
     "Camera",
 
+    "models/SongModel",
+    "models/ChainModel",
+
     "states/PlayState",
     "states/EditArea",
     "states/SongEditor",
