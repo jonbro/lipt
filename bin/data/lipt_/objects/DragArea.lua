@@ -20,7 +20,7 @@ function DragArea:touchMoved(x,y,id)
     	if self.onMove then
 	    	local r_val = self.onMove(self,x,y,id)
 	    end
-		self.lastPos[id] = Vec2(x, y)
+		  self.lastPos[id] = Vec2(x, y)
 	    return true
   	end
 	return true

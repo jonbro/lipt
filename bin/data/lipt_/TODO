@@ -1,6 +1,9 @@
-- setup models in lua so that the screens properly display
-- byte editor should display overlay with all of the possible things
+x setup models in lua so that the screens properly display
+x byte editor should display overlay with all of the possible things
+- add a sample loader
 - edge to edge slide to switch screens
+- store the song on quit
+- bpm / song editor
 - add a playhead indicator
 - two byte editor (FFFF)
 - effect editor (pulls from array of different effect types)

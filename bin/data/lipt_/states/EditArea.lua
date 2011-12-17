@@ -14,9 +14,29 @@ function EditArea:draw()
     o.tint = {r=200, g=255, b=200, a=255}
     o:draw()
   end
+  Group.draw(self)
+end
+function EditArea:addPicker()
+  if self.currentEdit then
+    if self.currentEdit:is_a(ByteEditor) then
+      self.picker = self:add(ByteEditorPicker())
+      if self.currentEdit.hasVal then self.picker:setValue(self.currentEdit:getValue()) end
+    end
+  end
+end
+
+function EditArea:removePicker()
+  if self.picker then
+    self:remove(self.picker)
+    self.picker = nil
+  end
+end
+function EditArea:hasPicker()
+  return self.picker
 end
 
 function EditArea:update()
+  Group.update(self)
   -- clear the background on the currently editable object
   -- find the newest object that is nearest to the center
   self.currentEdit = nil
@@ -27,6 +47,9 @@ function EditArea:update()
       lowestDistance = distToCenter
       self.currentEdit = v
     end
+  end
+  if self:hasPicker() and self.currentEdit and self.currentEdit.setValue then
+    self.currentEdit:setValue(self.picker:getValue())
   end
 end
 

@@ -32,6 +32,7 @@ function StringObject:buildSubs()
 	end
 	self.w = o.pos.x + o.w - self.pos.x
 	self.h = h
+	if self.cameras then self:setCameras(self.cameras) end
 end
 -- runs params though the proper updaters if they have changed
 function StringObject:update()
@@ -72,6 +73,12 @@ function StringObject:setScrollFactor(scrollFactor)
 	self.scrollFactor = scrollFactor
 	for i,v in ipairs(self.subs) do
 		v.scrollFactor = scrollFactor
+	end
+end
+function StringObject:setCameras(cameras)
+	self.cameras = cameras
+	for i,v in ipairs(self.subs) do
+		v.cameras = cameras
 	end
 end
 -- should memoize this function

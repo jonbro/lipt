@@ -23,6 +23,7 @@ do
     "objects/DragArea",
     "objects/NoteEditor",
     "objects/ByteEditor",
+    "objects/ByteEditorPicker",
 
     "profiler",
     "Camera",

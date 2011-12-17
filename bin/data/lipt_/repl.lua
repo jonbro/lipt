@@ -18,7 +18,13 @@
 -- phrase:set(0, 60, 0)      -- set position the note, instrument, and effects (to come)
 
 -- player:setSong(song.songData)
-player:startChan(2,0)
+-- player:startChan(2,0)
 
--- mainState:remove(mainState.edit)
--- mainState.edit = mainState:add(SongEditor(EditorRoot()))
+mainState = PlayState();
+
+
+
+
+
+
+
