@@ -5,7 +5,7 @@ EditArea = class(Group, function(o, editors)
 	o.center = Vec2(bludG.camera.w/2, bludG.camera.h/2)
 	o.editors = editors
 end)
-function EditArea:draw()
+function EditArea:drawBg()
   -- draw a square behind the current edit box
   if self.currentEdit then
     local o = Object(self.currentEdit.pos.x, self.currentEdit.pos.y, self.currentEdit.w, self.currentEdit.h)
@@ -14,14 +14,22 @@ function EditArea:draw()
     o.tint = {r=200, g=255, b=200, a=255}
     o:draw()
   end
-  Group.draw(self)
 end
 function EditArea:addPicker()
   if self.currentEdit then
     if self.currentEdit:is_a(ByteEditor) then
       self.picker = self:add(ByteEditorPicker())
       if self.currentEdit.hasVal then self.picker:setValue(self.currentEdit:getValue()) end
+    elseif self.currentEdit:is_a(NoteEditor) then
+      self.picker = self:add(NoteEditorPicker())
+      if self.currentEdit.hasVal then
+        self.picker:setValue(self.currentEdit:getValue())
+      else
+        -- set the default value
+        self.picker:setValue(60)
+      end
     end
+
   end
 end
 

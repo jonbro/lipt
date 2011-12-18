@@ -1,10 +1,12 @@
 StringObject = class(Object, function(o, x, y, string, font)
-	o.font = font or "_futura_30"
+	o.font = font or "_anonymous_30"
 	o.string = tostring(string)
 	Object.init(o, x, y, 0, 0)
 	-- should build all the subobjs here, and then just loop them in draw... something to do in the future
 	StringObject.buildSubs(o)
-	o.last = {}	
+	o.last = {}
+	o.fixedWidth = 26
+	if not retina then o.fixedWidth = o.fixedWidth / 2 end
 end)
 
 function StringObject:buildSubs()
@@ -23,14 +25,17 @@ function StringObject:buildSubs()
 			o.h = o.sprite:getHeight()
 			h = math.max(o.h, h)
 			table.insert(self.subs, o)
-			left = left + o.w
+			local w = self.fixedWidth or o.w
+			left = left + w
 		elseif self.string:byte(i) == 32 then
-			left = left + sprites["88" .. self.font .. ".png"]:getWidth()
+			local w = self.fixedWidth or sprites["88" .. self.font .. ".png"]:getWidth()
+			left = left + w
 		else
 			print("missing char: " .. self.string:byte(i) .. self.font .. ".png")
 		end
 	end
-	self.w = o.pos.x + o.w - self.pos.x
+	local w = self.fixedWidth or o.w
+	self.w = o.pos.x + w - self.pos.x
 	self.h = h
 	if self.cameras then self:setCameras(self.cameras) end
 end

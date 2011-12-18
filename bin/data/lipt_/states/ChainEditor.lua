@@ -3,8 +3,9 @@ local numPositions = 16
 ChainEditor = class(Group, function(o, root, chainNum)
 	Group.init(o)
 	o.editors = Group()
-	o.editControl = o:add(EditArea(o.editors))
+	o.positions = o:add(Group())
 	o:add(o.editors)
+	o.editControl = o:add(EditArea(o.editors))
 	o.chainNum = chainNum
 	o.chain = song:getChain(chainNum)  -- gets a chain
 
@@ -16,8 +17,9 @@ ChainEditor = class(Group, function(o, root, chainNum)
 	-- should display a bunch of byte editors, for the channels and the number of positions supported
 	for j=0,numPositions-1 do
 		-- add a position indicator
-		local pi = o:add(StringObject(0, j*size.y, dtoh(j)))
+		local pi = o.positions:add(StringObject(0, j*size.y, dtoh(j)))
 		pi:setColor(200, 120, 120)
+		pi:setLayer(0)
 		for i,v in ipairs(columns) do
 			-- move over by one to account for the position indicator
 			local e = o.editors:add(ByteEditor(size.x*(i+1), size.y*j, o.root))
@@ -33,23 +35,20 @@ ChainEditor = class(Group, function(o, root, chainNum)
 	o.toPhrase = RoundedButton(bludG.camera.w-80, 0, 80, 80, "P")
 	o.toPhrase.scrollFactor = Vec2(0,0)	
 	o.toPhrase.onPress = function()
-		-- this should be some type of wrapper state at some point. lets keep it raw for now though
-		mainState:remove(mainState.edit)
-		-- extract the chain value, and switch to the chain editor
-		mainState.edit = mainState:add(PhraseEditor(o.root, o.editControl.currentEdit:getValue(), o.chainNum))
+		mainState.edit = mainState:replaceState(mainState.edit, PhraseEditor(o.root, o.editControl.currentEdit:getValue(), o.chainNum))
 	end
 	o.showingPhrase = false
 
 	o.toSong = o:add(RoundedButton(0,0,80,80, "S"))
 	o.toSong.scrollFactor = Vec2(0,0)
 	o.toSong.onPress = function()
-		-- this should be some type of wrapper state at some point. lets keep it raw for now though
-		mainState:remove(mainState.edit)
-		-- extract the chain value, and switch to the chain editor
-		mainState.edit = mainState:add(SongEditor(o.root))
+		mainState.edit = mainState:replaceState(mainState.edit, SongEditor(o.root))
 	end
 end)
-
+function ChainEditor:draw()
+	self.editControl:drawBg()
+	Group.draw(self)
+end
 function ChainEditor:update()
 	Group.update(self)
 	if not self.showingPhrase and self.editControl.currentEdit and self.editControl.currentEdit.hasVal then

@@ -41,4 +41,7 @@ function ByteEditor:setValue(value)
 	self.hasVal = true
 	self.string:setValue(dtoh(math.floor(self.value)))
 	self.w, self.h = self.string.w, self.string.h
+	if self.onChange then
+		self.onChange(math.floor(value))
+	end
 end

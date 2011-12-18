@@ -1,5 +1,5 @@
-TexturePacker --trim --format corona --data cute_list-hd.lua --algorithm MaxRects --extrude 1 --maxrects-heuristics best --verbose --sheet assets/cute@2x.png ../../../ungrouped_sprites/*;
-TexturePacker --trim --format corona --data cute_list.lua --algorithm MaxRects --extrude 1 --maxrects-heuristics best --verbose --scale 0.5 --padding 0 --reduce-border-artifacts --sheet assets/cute.png ../../../ungrouped_sprites/*;
+TexturePacker --trim --format corona --data cute_list-hd.lua --algorithm MaxRects --extrude 1 --width 512 --height 512 --maxrects-heuristics best --verbose --sheet assets/cute@2x.png ungrouped_sprites/*;
+TexturePacker --trim --format corona --data cute_list.lua --algorithm MaxRects --width 256 --height 256 --extrude 1 --maxrects-heuristics best --verbose --scale 0.5 --padding 0 --reduce-border-artifacts --sheet assets/cute.png ungrouped_sprites/*;
 
 # sed -i"" "/module/d" cute_list.lua;
 # sed -i"" "/module/d" cute_list-hd.lua;

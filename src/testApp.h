@@ -13,6 +13,8 @@
 #import "FlurryAnalytics.h"
 #include "AVFoundationVideoPlayer.h"
 #include "Player.h"
+#include "physfs.h"
+#include "PFileSystem.h"
 
 class testApp : public ofxiPhoneApp{
 

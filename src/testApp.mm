@@ -1,13 +1,12 @@
 #include "testApp.h"
 #include "bludPd.h"
 #include "bludAnalytics.h"
-
 #include <curl/curl.h>
 #include "Lua-cURL.h"
 
 //--------------------------------------------------------------
 void testApp::setup(){
-    
+        
     int startTime = ofGetElapsedTimeMillis();
     cout << "start time: " << startTime << endl;
     ofRegisterTouchEvents(this);
@@ -31,11 +30,21 @@ void testApp::setup(){
 
     
     blud.setup();
+    
+    // setup the physicsfs first so that lua has access to it
+    PHYSFS_init(NULL);
+    int e = PHYSFS_mount(ofToDataPath("sampleLib.zip").c_str(),"", 1);
+    if(e==0){
+        cout << "error mounting: " << PHYSFS_getLastError() << endl;
+    }
+    cout << "does note6 exist: " << PHYSFS_exists("note6.wav") << endl;
+
     // need to load the core file after pd so that the seed is loaded in properly for the first world
     
 	Lunar<bludPd>::Register(blud.luaVM);
 	Lunar<bludGK>::Register(blud.luaVM);
     Lunar<bludAnalytics>::Register(blud.luaVM);
+    Lunar<PFileSystem>::Register(blud.luaVM);
     
     Lunar<SampleData>::Register(blud.luaVM);
     Lunar<ChainModel>::Register(blud.luaVM);

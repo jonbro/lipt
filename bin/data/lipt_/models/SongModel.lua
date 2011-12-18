@@ -21,7 +21,7 @@ LSongModel = class(function(o, songData)
 	for i=0,numDatas-1 do
 		o.phrases[i] = LPhraseModel(o.songData:getPhrase(i))
 	end
-
+	o.samples = {} -- hold lua refs to the samples that we have loaded so far
 end)
 
 function LSongModel:setChain(position, channel, value)

@@ -23,6 +23,13 @@ end
 function htod(IN)
   return tonumber("0x" .. IN)
 end
+local notes = {"C ", "C#", "D ", "D#", "E ", "F ", "F#", "G ", "G#", "A ", "A#", "B "}
+function numToNote(num)
+  value = num%12
+  octave = math.floor(num/12)-3;
+  if octave >= 0 then octave = " " .. octave end
+  return notes[math.max(0, math.min(11, math.floor(value)))+1] .. tostring(octave)
+end
 
 -- utility for getting around tables
 function findNode(rootNode, name)

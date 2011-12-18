@@ -3,8 +3,8 @@
 PhraseEditor = class(Group, function(o, root, phraseNum, fromChain)
   Group.init(o)
   o.editors = Group()
-  o.editControl = o:add(EditArea(o.editors))
   o:add(o.editors)
+  o.editControl = o:add(EditArea(o.editors))
   
   o.phrase = song:getPhrase(phraseNum)  -- get the phrase
 
@@ -34,10 +34,12 @@ PhraseEditor = class(Group, function(o, root, phraseNum, fromChain)
   o.toPhrase = o:add(RoundedButton(0,0,80,80, "P"))
   o.toPhrase.scrollFactor = Vec2(0,0)
   o.toPhrase.onPress = function()
-    -- this should be some type of wrapper state at some point. lets keep it raw for now though
-    mainState:remove(mainState.edit)
-    -- extract the chain value, and switch to the chain editor
-    mainState.edit = mainState:add(ChainEditor(o.root, fromChain))
+    mainState.edit = mainState:replaceState(mainState.edit, ChainEditor(o.root, fromChain))
   end
 
 end)
+
+function PhraseEditor:draw()
+  self.editControl:drawBg()
+  Group.draw(self)
+end

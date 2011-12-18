@@ -1,6 +1,10 @@
-x setup models in lua so that the screens properly display
-x byte editor should display overlay with all of the possible things
+x write a file wrapper for physicsfs. Try to match the way that love2d works.
+x let the sampler load from physicsfs file handles
+- default the note editor to the last set note
+- make the instrument not fail if the sample is defined but not loaded
+- copy samples from one folder to another (should use physfs file handlesq)
 - add a sample loader
+- setting a note should automatically set an instrument
 - edge to edge slide to switch screens
 - store the song on quit
 - bpm / song editor
@@ -10,17 +14,21 @@ x byte editor should display overlay with all of the possible things
 - one byte editor, fix hori - 16 edit
 - edit clear
 - nonedit, one byte for line display
-- chain editor
-- song editor
 - instrument editor
 - synth implementation
-- physicfs
 - load some samples by default
 - saving
 
 x sample loading
 x one byte editor
 x note editor (up down note, left right octave)
+x setup models in lua so that the screens properly display
+x byte editor should display overlay with all of the possible things
+x switch to a monospaced font
+x note editor should use the same input as the byte editor
+x physicfs
+x chain editor
+x song editor
 
 structure
 - root. contains the core bpm, and name of the project. This is how the samples are looked up.

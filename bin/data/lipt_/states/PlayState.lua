@@ -18,7 +18,8 @@ PlayState = class(Group, function(o)
   o.center = Vec2(bludG.camera.w/2, bludG.camera.h/2)
   o.root = EditorRoot()
 
-  o.edit = o:add(SongEditor(o.root))
+  o.substates = o:add(Group())
+  o.edit = o.substates:add(SongEditor(o.root))
   
   o.drag = o:add(DragArea(0,0,bludG.camera.w, bludG.camera.h))
   o.drag.onStart = function(da,x, y, id)
@@ -35,7 +36,6 @@ PlayState = class(Group, function(o)
       -- move the camera by however much the user scrolled
       bludG.camera.scroll:sub(p)
     end
-    return true
   end
   o.drag.onPress = function(da,x, y, id)
     -- add the type of edit picker that we need depending on the displayed editor
@@ -45,3 +45,20 @@ PlayState = class(Group, function(o)
   end
 
 end)
+
+function PlayState:replaceState(existingState, stateToAdd)
+  -- find the state
+  local existingPosition
+  for i,v in ipairs(self.substates.members) do
+    if v == existingState then existingPosition = i end
+  end
+  if existingPosition then
+    self.substates.members[existingPosition] = stateToAdd
+    -- call the after removal
+    if existingState.afterRemove then existingState:afterRemove() end
+  else
+    print("could not find state to replace")
+    return
+  end
+  return stateToAdd
+end

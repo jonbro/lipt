@@ -4,8 +4,9 @@ local numPositions = 20
 SongEditor = class(Group, function(o, root)
 	Group.init(o)
 	o.editors = Group()
-	o.editControl = o:add(EditArea(o.editors))
+	o.positions = o:add(Group())
 	o:add(o.editors)
+	o.editControl = o:add(EditArea(o.editors))
 	
 	o.root = root
 	local size = Vec2(60, 60)
@@ -14,8 +15,9 @@ SongEditor = class(Group, function(o, root)
 	-- eventually these should be loaded from the root object.
 	for j=0,numPositions-1 do
 		-- add a position indicator
-		local pi = o:add(StringObject(0, j*size.y, dtoh(j)))
+		local pi = o.positions:add(StringObject(0, j*size.y, dtoh(j)))
 		pi:setColor(200, 120, 120)
+		pi:setLayer(0)
 		for i=0,numChannels-1 do
 			-- move over by one to account for the position indicator
 			local e = o.editors:add(ByteEditor(size.x*(i+1), size.y*j, o.root))
@@ -32,11 +34,7 @@ SongEditor = class(Group, function(o, root)
 	o.toChain = RoundedButton(bludG.camera.w-80, 0, 80, 80, "C")
 	o.toChain.scrollFactor = Vec2(0,0)
 	o.toChain.onPress = function()
-		-- this should be some type of wrapper state at some point. lets keep it raw for now though
-		mainState:remove(mainState.edit)
-		-- extract the chain value, and switch to the chain editor
-		print("loading chain num", o.editControl.currentEdit.value)
-		mainState.edit = mainState:add(ChainEditor(o.root, o.editControl.currentEdit:getValue()))
+		mainState.edit = mainState:replaceState(mainState.edit, ChainEditor(o.root, o.editControl.currentEdit:getValue()))
 	end
 	o.showingPhrase = false
 end)
@@ -51,4 +49,12 @@ function SongEditor:update()
 		self:remove(self.toChain)
 		self.showingPhrase = false
 	end
+end
+function SongEditor:draw()
+	self.editControl:drawBg()
+	Group.draw(self)
+end
+function SongEditor:onMove(x, y, id)
+	Group.onMove(self, x, y, id)
+	print("song editor moving")
 end

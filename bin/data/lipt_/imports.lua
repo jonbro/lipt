@@ -24,6 +24,7 @@ do
     "objects/NoteEditor",
     "objects/ByteEditor",
     "objects/ByteEditorPicker",
+    "objects/NoteEditorPicker",
 
     "profiler",
     "Camera",
