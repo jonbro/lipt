@@ -48,7 +48,7 @@ void Player::tick(){
                 if (inst.hasSample) {
                     channels[i].loadSample(inst.sample);
                     channels[i].setLoopPoints(0, 1);
-                    channels[i].setLoopType(1);
+                    channels[i].setLoopType(inst.loopMode);
                 }
             }
             if(phrase->hasNote[phraseStep[i]]){

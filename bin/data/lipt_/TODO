@@ -1,4 +1,5 @@
 - manage the screens as a stack, only render the object that is on the top of the stack, then switching screens will just be a matter of adding and removing to the stack, will maintain state
+- add the different loop types from piggy
 - start a git repo for this project
 - bring the camera back to the last point it was when you were on that screen
 - setting a chain should default to the last chain set
@@ -11,7 +12,6 @@
 - cloning phrases
 - cloning chains
 - load up a few of the default piggy sample packs
-- add the different loop types from piggy
 - stop running phrases
 - start running phrases in sync
 

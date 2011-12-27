@@ -110,6 +110,7 @@ public:
 	static Lunar<InstrumentModel>::RegType methods[];
 	InstrumentModel(lua_State *L){
         hasSample = false;
+        loopMode = 0;
 	}
 	InstrumentModel(){
         hasSample = false;
@@ -120,10 +121,15 @@ public:
         hasSample = true;
         return 1;
     }
+    int setLoopMode(lua_State *L){
+        loopMode = luaL_checknumber(L, 1);
+        return 1;
+    }
     ~InstrumentModel(){
 	}
     bool hasSample;
     ofxSynthSample *sample;
+    int loopMode;
 };
 
 // a list of the chains in each channel

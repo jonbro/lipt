@@ -24,6 +24,7 @@ Lunar<PhraseModel>::RegType PhraseModel::methods[] = {
 const char InstrumentModel::className[] = "InstrumentModel";
 Lunar<InstrumentModel>::RegType InstrumentModel::methods[] = {
 	method(InstrumentModel, setSample),
+	method(InstrumentModel, setLoopMode),
 	{0,0}
 };
 

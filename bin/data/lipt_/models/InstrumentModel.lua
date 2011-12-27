@@ -1,6 +1,8 @@
 LInstrumentModel = class(function(o, iData, song)
 	o.song = song
 	o.iData = iData
+	o.loopMode = 2
+	o.loopModes = {"none", "loop"}
 end)
 
 -- takes a filename
@@ -21,13 +23,21 @@ function LInstrumentModel:setSample(sample)
 	-- store the sample name so that we can display it in the instrument editor later
 	self.sampleName = sample
 end
-
+function LInstrumentModel:setLoopMode(value)
+	print("setting loop mode", value)
+	self.iData:setLoopMode(value-1)
+	self.loopMode = value
+end
 function LInstrumentModel:saveTo(data)
 	data.sampleName = self.sampleName
+	data.loopMode = self.loopMode
 	return data
 end
 function LInstrumentModel:loadFrom(data)
 	if data.sampleName then
 		self:setSample(data.sampleName)
+	end
+	if data.loopMode then
+		self:setLoopMode(data.loopMode)
 	end
 end

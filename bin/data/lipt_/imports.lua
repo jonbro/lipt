@@ -11,9 +11,6 @@ do
     "oscHooks",
     "Particles",
     "tablePersistance",
-    "compression/bit",
-    "compression/LibStub",
-    "compression/LibCompress",
     
     "objects/StringObject",
     "objects/Button",
@@ -24,8 +21,10 @@ do
     "objects/NoteEditor",
     "objects/ByteEditor",
     "objects/TempoEditor",
+    "objects/ListEditor",
     "objects/ByteEditorPicker",
     "objects/NoteEditorPicker",
+    "objects/ListEditorPicker",
 
     "profiler",
     "Camera",
