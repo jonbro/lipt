@@ -41,6 +41,9 @@ function StringObject:buildSubs()
 end
 -- runs params though the proper updaters if they have changed
 function StringObject:update()
+	if not self.last.tint then
+		self.last.tint = {}
+	end
 	if not self.last.tint.r or self.last.tint.r ~= self.tint.r or self.last.tint.g ~= self.tint.g or self.last.tint.b ~= self.tint.b or self.last.tint.a ~= self.tint.a then
 		self:setColor(self.tint.r, self.tint.g, self.tint.b, self.tint.a)
 	end

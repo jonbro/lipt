@@ -4,7 +4,6 @@ NoteEditorPicker = class(ByteEditorPicker, function(o)
 	local so = StringObject(0,0,"")
 	o.size = Vec2(so.fixedWidth*5, 60)
 	o:buildSelectors(0,0)
-	print("blah")
 end)
 
 function NoteEditorPicker:buildSelectors(x, y)

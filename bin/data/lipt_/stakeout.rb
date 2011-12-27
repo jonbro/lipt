@@ -1,7 +1,7 @@
 require 'fssm'
 require 'osc'
-Host = '192.168.1.114'
-# Host = 'localhost'
+# Host = '192.168.1.114'
+Host = 'localhost'
 Port = 9001
 c = OSC::UDPSocket.new
 

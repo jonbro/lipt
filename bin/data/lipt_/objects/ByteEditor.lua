@@ -45,3 +45,8 @@ function ByteEditor:setValue(value)
 		self.onChange(math.floor(value))
 	end
 end
+
+function ByteEditor:clearValue()
+	self.string:setValue("--")
+	self.hasVal = false
+end

@@ -1,6 +1,10 @@
 local numChannels = 8
 local numPositions = 20
-local numDatas = 128
+local numDatas = 256
+
+-- should be able to determine the stack of loaded screens from this, and roll them back.
+-- like if we are deep in the table should be able to loop back through the instrument, phrase, chain that got us there
+
 LSongModel = class(function(o, songData)
 	o.songData = songData
 	o.channels = {}
@@ -13,42 +17,61 @@ LSongModel = class(function(o, songData)
 	-- setup the chains
 	o.chains = {}
 	for i=0,numDatas-1 do
-		o.chains[i] = LChainModel(o.songData:getChain(i))
+		o.chains[i] = LChainModel(o.songData:getChain(i), o)
 	end
 
 	-- setup the phrases
 	o.phrases = {}
 	for i=0,numDatas-1 do
-		o.phrases[i] = LPhraseModel(o.songData:getPhrase(i))
+		o.phrases[i] = LPhraseModel(o.songData:getPhrase(i), o)
 	end
-	o.samples = {} -- hold lua refs to the samples that we have loaded so far
-end)
+	
+	-- setup the instruments
+	o.instruments = {}
+	for i=0,numDatas-1 do
+		o.instruments[i] = LInstrumentModel(o.songData:getInstrument(i), o)
+	end
 
+	o.samples = {} -- hold lua refs to the samples that we have loaded so far
+	o.tempo = 120
+end)
+function LSongModel:clearChain(position, channel)
+	self.songData:clearChain(channel, position)
+	self.channels[channel][position].hasChain = false
+end
 function LSongModel:setChain(position, channel, value)
 	self.songData:setChain(channel, position, value)
 	self.channels[channel][position].hasChain = true
 	self.channels[channel][position].chain = value
 end
 function LSongModel:getChain(value)
-	-- this should return the LChainModel at some point
 	return self.chains[math.floor(value)]
 end
 function LSongModel:getPhrase(value)
-	-- this should return the LPhraseModel at some point
 	return self.phrases[math.floor(value)]
 end
 function LSongModel:getInstrument(value)
-	-- this should return the LInstrumentModel at some point
-	return self.songData:getInstrument(value)
+	return self.instruments[math.floor(value)]
+end
+function LSongModel:setTempo(value)
+	self.tempo = value
+	player:setTempo(value)
+end
+function LSongModel:setPlayer(player)
+	self.player = player
 end
 
 function LSongModel:saveTo(data)
 	data.channels = self.channels
-	-- save all the chains
-	data.chains = {}
-	for i,v in pairs(self.chains) do
-		data.chains[i] = v:saveTo({})
+	local toSave = {"chains", "phrases", "instruments"}
+	for i,x in pairs(toSave) do
+		-- save all the x
+		data[x] = {}
+		for i,v in pairs(self[x]) do
+			data[x][i] = v:saveTo({})
+		end
 	end
+	data.tempo = self.tempo
 	return data
 end
 function LSongModel:loadFrom(data)
@@ -59,8 +82,16 @@ function LSongModel:loadFrom(data)
 			end
 		end
 	end
-	-- load up the chains
-	for i,v in pairs(data.chains) do
-		self.chains[i]:loadFrom(v)
+	local toLoad = {"chains", "phrases", "instruments"}
+	for i,x in pairs(toLoad) do
+		-- load all the x
+		if data[x] then
+			for i,v in pairs(data[x]) do
+				self[x][i]:loadFrom(v)
+			end
+		end
+	end
+	if data.tempo then
+		self:setTempo(data.tempo)
 	end
 end

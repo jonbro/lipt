@@ -23,6 +23,7 @@ do
     "objects/DragArea",
     "objects/NoteEditor",
     "objects/ByteEditor",
+    "objects/TempoEditor",
     "objects/ByteEditorPicker",
     "objects/NoteEditorPicker",
 
@@ -32,13 +33,17 @@ do
     "models/SongModel",
     "models/ChainModel",
     "models/PhraseModel",
+    "models/InstrumentModel",
 
     "states/PlayState",
     "states/EditArea",
     "states/SongEditor",
     "states/PhraseEditor",
     "states/ChainEditor",
-
+    "states/ProjectEditor",
+    "states/InstrumentEditor",
+    "states/SamplePickerState",
+    
     "Tweener",
     "SoundBank",
     "oscHooks"

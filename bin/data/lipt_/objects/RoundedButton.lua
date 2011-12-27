@@ -4,12 +4,12 @@ RoundedButton = class(Button, function(o, x, y, w, h, text)
 	o.padding = Vec2(20, 4)
 	if not retina then o.padding:mult(0.5) end
 	if text then
-		o.text = StringObject(x, y, text, "_futura_40")
-		o.text.scrollFactor = Vec2(0,0)
+		o.text = StringObject(x, y, text)
+		o.text.scrollFactor = Vec2(1,1)
 		o.text:setColor(181, 128, 68)
 
-		o.textDrop = StringObject(x, y, text, "_futura_40")
-		o.textDrop.scrollFactor = Vec2(0,0)
+		o.textDrop = StringObject(x, y, text)
+		o.textDrop.scrollFactor = Vec2(1,1)
 		o.textDrop:setColor(133, 93, 46)
 	end
 	o:setPosition(o.pos.x, o.pos.y)
@@ -24,6 +24,10 @@ function RoundedButton:setLayer(layer)
 end
 -- runs params though the proper updaters if they have changed
 function RoundedButton:update()
+	if self.text.scrollFactor ~= self.scrollFactor then
+		self.text:setScrollFactor(self.scrollFactor)
+		self.textDrop:setScrollFactor(self.scrollFactor)
+	end
 	if self.last.tint then
 		if not self.last.tint.r or self.last.tint.r ~= self.tint.r or self.last.tint.g ~= self.tint.g or self.last.tint.b ~= self.tint.b or self.last.tint.a ~= self.tint.a then
 			self:setColor(self.tint.r, self.tint.g, self.tint.b, self.tint.a)

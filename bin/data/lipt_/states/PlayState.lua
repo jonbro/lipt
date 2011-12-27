@@ -24,7 +24,7 @@ PlayState = class(Group, function(o)
   o.drag = o:add(DragArea(0,0,bludG.camera.w, bludG.camera.h))
   o.drag.onStart = function(da,x, y, id)
     -- add the type of edit picker that we need depending on the displayed editor
-    if id == 1 then
+    if o.edit.editControl and id == 1 then
       o.edit.editControl:addPicker()
     end
   end
@@ -32,14 +32,14 @@ PlayState = class(Group, function(o)
     local p = Vec2(x, y)
     p:sub(da.lastPos[id])
     -- if this is the first finger down
-    if id == 0 and not o.edit.editControl:hasPicker() then
+    if id == 0 and o.edit.editControl and not o.edit.editControl:hasPicker() then
       -- move the camera by however much the user scrolled
       bludG.camera.scroll:sub(p)
     end
   end
   o.drag.onPress = function(da,x, y, id)
     -- add the type of edit picker that we need depending on the displayed editor
-    if id == 1 then
+    if id == 1 and o.edit.editControl then
       o.edit.editControl:removePicker()
     end
   end

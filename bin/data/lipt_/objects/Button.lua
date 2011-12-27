@@ -35,6 +35,9 @@ function Button:touchUp(x, y, id)
   self.fingerDown[id] = nil
   return true
 end
+function Button:clearTouches()
+  self.fingerDown = {}
+end
 
 -- a button that actually respects its position on the camera
 CameraButton = class(Button, function(o, x, y, w, h, sprite)
@@ -65,7 +68,6 @@ function CameraButton:touchUp(x, y, id)
   if Rectangle.doesPointTouch(self, Vec2(x, y)) and self.fingerDown[id] then
     self.fingerDown[id] = nil
     if self.onPress then 
-      playEffect("click")
       --reset the original position
       self.pos.x, self.pos.y = pos.x, pos.y
       return self:onPress()

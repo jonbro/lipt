@@ -5,6 +5,7 @@ const char tPlayer::className[] = "tPlayer";
 Lunar<tPlayer>::RegType tPlayer::methods[] = {
 	method(tPlayer,setSong),
 	method(tPlayer,startChan),
+    method(tPlayer, setTempo),
 	{0,0}
 };
 
@@ -21,7 +22,8 @@ Player::Player(){
         // setup the samplers
         mixer->addInputFrom(&channels[i]);
     }
-    
+    samplesPerTick = 4000;
+    sampleRate = 44100;
 }
 
 Player* Player::getInstance(){
@@ -141,6 +143,8 @@ void Player::setSong(SongModel *s){
 void startAll(int step);
 
 void Player::startChan(int chan, int step){
+    // just in case the chan is playing, then stop the chan.
+    playing[chan] = false;
     printf("start chan: %i, step: %i on song (%p)\n", chan, step, song);
     // check to see if this step has a valid chain and phrase
     if(song->channel[chan].hasChain[step]){
@@ -165,17 +169,21 @@ void Player::startChan(int chan, int step){
 }
 
 void Player::audioRequested( float* buffer, int numFrames, int numChannels ){
+    memset(buffer, 0, numFrames*numChannels);
 	for (int i = 0; i<numFrames; i++) {
-        for (int j = 0; j<numChannels; j++) {        
-            buffer[i*numChannels+j] = 0;
-        }
         sampleCount++;
-        if(sampleCount%4000 == 0){
+        if(sampleCount%samplesPerTick == 0){
             tick();
         }
 	}
 }
-
+void Player::setTempo(int tempo){
+    // convert the tempo to number of samples
+    float clockMult = 4; // because we are doing quarter notes as beats, we need to divide by four
+	float bpm = tempo;
+	samplesPerTick = (sampleRate*60/bpm)/clockMult;
+    
+}
 void Player::setSampleRate( int rate ){
 	sampleRate = rate;
 }

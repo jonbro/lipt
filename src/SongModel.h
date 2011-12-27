@@ -33,6 +33,11 @@ public:
         phrase[step] = luaL_checkinteger(L, 2);
         return 1;
     }
+    int clearPhrase(lua_State *L){
+        int step = luaL_checkinteger(L, 1);
+        hasPhrase[step] = false;
+        return 1;
+    }
 
     ~ChainModel(){
 	}
@@ -62,10 +67,13 @@ public:
         this->hasInst[step] = true;
         this->note[step] = luaL_checkinteger(L, 2);
         this->inst[step] = luaL_checkinteger(L, 3);
-        cout << "setting note for step: " << step << " note: " << note[step] << endl;
         return 1;
     }
-
+    int clearNote(lua_State *L){
+        int step = luaL_checkinteger(L, 1);
+        this->hasNote[step] = false;
+        return 1;
+    }
     ~PhraseModel(){
 	}
     
@@ -144,6 +152,10 @@ public:
         Lunar<InstrumentModel>::push(L, inst);
         return 1;
     }
+    int clearChain(lua_State *L){
+        channel[luaL_checkinteger(L, 1)].hasChain[luaL_checkinteger(L, 2)] = false;
+        return 1;
+    }
     int setChain(lua_State *L){
         channel[luaL_checkinteger(L, 1)].hasChain[luaL_checkinteger(L, 2)] = true;
         channel[luaL_checkinteger(L, 1)].chain[luaL_checkinteger(L, 2)] = luaL_checkinteger(L, 3);
@@ -151,14 +163,11 @@ public:
     }
     int getChain(lua_State *L){
         ChainModel *chain = &this->chain[luaL_checkinteger(L, 1)];
-        printf("got chain %i (%p), %p\n", luaL_checkinteger(L, 1), chain, &this->chain[luaL_checkinteger(L, 1)]);
         Lunar<ChainModel>::push(L, chain);
         return 1;
     }
     int getPhrase(lua_State *L){
         PhraseModel *phrase = &this->phrase[luaL_checkinteger(L, 1)];
-        printf("got phrase (%p)\n", phrase);
-        printf("on song (%p)\n", this);
         
         Lunar<PhraseModel>::push(L, phrase);
         return 1;
@@ -169,8 +178,8 @@ public:
 	}
     int bpm;
     // everything is public so that we can quickly access without function call overhead
-    InstrumentModel instrument[128];
-    PhraseModel phrase[128];
-    ChainModel chain[128];
+    InstrumentModel instrument[256];
+    PhraseModel phrase[256];
+    ChainModel chain[256];
     ChannelModel channel[8];
 };

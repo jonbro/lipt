@@ -29,13 +29,23 @@ ChainEditor = class(Group, function(o, root, chainNum)
 			end
 			e.onChange = function(newVal)
 				o.chain:set(j, newVal, 0)      -- set chain to phrase and transpose at position
+				song.last_phrase = newVal
 			end
+			function e:getDefault()
+				if song.last_phrase then return song.last_phrase end
+				return 0
+			end
+			e.onClear = function()
+		      o.chain:clearStep(j)
+		      e:clearValue()
+		    end
+
 		end
 	end
 	o.toPhrase = RoundedButton(bludG.camera.w-80, 0, 80, 80, "P")
 	o.toPhrase.scrollFactor = Vec2(0,0)	
 	o.toPhrase.onPress = function()
-		mainState.edit = mainState:replaceState(mainState.edit, PhraseEditor(o.root, o.editControl.currentEdit:getValue(), o.chainNum))
+		mainState.edit = mainState:replaceState(mainState.edit, PhraseEditor(o.root, o.editControl.currentEdit:getValue(), o.chainNum, song))
 	end
 	o.showingPhrase = false
 

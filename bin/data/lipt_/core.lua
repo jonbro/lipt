@@ -1,8 +1,17 @@
 dofile(blud.bundle_root .. "/lipt_/imports.lua")
+fs = PFileSystem();
 
 -- this is just a defaulty thing to make things easy on me
 player = tPlayer()
 song = LSongModel(SongModel())         -- contains all of the song data. This is a more lua-y object
+song:setPlayer(player)
+-- check to see if there is a song to load
+saveData = persistence.load(blud.doc_root .. "/songdata.lua");
+if saveData  then
+  song:loadFrom(saveData)
+end
+player:setSong(song.songData)
+
 
 function dtoh(IN)
     local oi = IN
@@ -145,24 +154,9 @@ function blud.gotFocus()
   bludG.last_t = bg:getMillis()/1000
 end
 function blud.exit()
-  persistence.store(blud.doc_root .. "/storage.lua", playerdata);
+  local songdata = song:saveTo({})
+  persistence.store(blud.doc_root .. "/songdata.lua", songdata);
 end
 
 -- seed the thing
 math.randomseed(bludG:seedRandom())
-
---[[
-song:setChain(0, 0, 0)    -- sets a channel position to a chain
-chain = song:getChain(0)  -- gets a chain
-chain:set(0, 0, 0)      -- set chain to phrase and transpose at position
-
-sample = SampleData()
-sample:loadSample(blud.bundle_root .. "/test/test.wav")
-
-instrument = song:getInstrument(0)
-instrument:setSample(sample)
-phrase = song:getPhrase(0)  -- get the phrase
-phrase:set(0, 60, 0)      -- set position the note, instrument, and effects (to come)
-player:setSong(song)
-player:startChan(0,0)
---]]

@@ -64,6 +64,10 @@ function NoteEditor:setValue(newValue)
 	end
 	self.hasVal = true
 end
+function NoteEditor:clearValue()
+	self.string:setValue("----")
+	self.hasVal = false
+end
 -- calculate the value based on the octave and value
 function NoteEditor:getValue()
 	return self.value

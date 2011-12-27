@@ -98,8 +98,6 @@ function ByteEditorPicker:setValue(val)
 	self:buildSelectors(self.selCenter.x, self.selCenter.y)
 	self.menuCamera.scroll = Vec2(0, 0)
 end
-
-
 function ByteEditorPicker:getValue()
 	return (self.selCenter.x)%16*16+(self.selCenter.y)%16
 end

@@ -20,10 +20,11 @@ public:
     void    startAll(int step);
     void    startChan(int chan, int step);
     void    setSong(SongModel *s);
+    void    setTempo(int tempo);
     
     void		audioRequested( float* buffer, int numFrames, int numChannels );
     void		setSampleRate(int rate);
-
+    
 private:
     // singleton
     Player();
@@ -41,7 +42,7 @@ private:
     int currentPhrase[NUM_CHANNELS]; // the currently playing phrase in the channel
     int phraseStep[NUM_CHANNELS]; // where in the phrase the channel is
     
-    int sampleRate, sampleCount;
+    int sampleRate, sampleCount, samplesPerTick;
 };
 
 class tPlayer{
@@ -57,6 +58,10 @@ public:
     };
     int startChan(lua_State *L){
         p->startChan(luaL_checknumber(L, 1), luaL_checknumber(L, 2));
+        return 1;
+    };
+    int setTempo(lua_State *L){
+        p->setTempo(luaL_checknumber(L, 1));
         return 1;
     };
 private:
