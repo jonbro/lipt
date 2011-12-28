@@ -18,6 +18,8 @@ const char PhraseModel::className[] = "PhraseModel";
 Lunar<PhraseModel>::RegType PhraseModel::methods[] = {
 	method(PhraseModel, set),
 	method(PhraseModel, clearNote),
+	method(PhraseModel, setEffect),
+	method(PhraseModel, removeEffect),
 	{0,0}
 };
 

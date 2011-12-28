@@ -1,4 +1,4 @@
-
+local effectTypes = {"---", "VOL"}
 -- this is the song editor. Should probably change the language here to reflect that
 PhraseEditor = class(Group, function(o, root, phraseNum, fromChain, song)
   Group.init(o)
@@ -16,6 +16,7 @@ PhraseEditor = class(Group, function(o, root, phraseNum, fromChain, song)
   if not retina then padding = padding/2 end
   local s = StringObject(0,0,"A")
   for y=1,16 do
+
     local nedit = o.editors:add(NoteEditor(0,(y-1)*s.h, o.root))
     o.notes:add(nedit)
     local insEdit = o.editors:add(ByteEditor(nedit.w+padding, nedit.pos.y, o.root))
@@ -46,6 +47,17 @@ PhraseEditor = class(Group, function(o, root, phraseNum, fromChain, song)
       o.phrase:clearNote(y-1)
       nedit:clearValue()
     end
+
+    -- add the effect editors
+    local efx1 = o.editors:add(ListEditor(insEdit.pos.x+insEdit.w+padding, nedit.pos.y, {}, effectTypes))
+    local efxbyte1 = o.editors:add(ByteEditor(efx1.pos.x+efx1.w+padding/2, nedit.pos.y, o.root))
+    local efxbyte2 = o.editors:add(ByteEditor(efxbyte1.pos.x+efxbyte1.w, nedit.pos.y, o.root))
+    -- the storage is handled higher up, this just bundles up all of the changes and chucks them over to c
+    efx1.onChange = function(newVal)
+      o.phrase:setEffect(y-1, 1, efx1:getValue(), efxbyte1:getValue(), efxbyte2:getValue())
+    end
+    efxbyte1.onChange = efx1.onChange
+    efxbyte2.onChange = efx1.onChange
   end
 
   o.toPhrase = o:add(RoundedButton(0,0,80,80, "P"))

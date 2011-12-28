@@ -3,14 +3,15 @@
 #include "ofxSynthSampler.h"
 
 enum EffectType{
-    VOL,
+    VOL = 0,
     PTCH
 };
 
 typedef struct{
     bool hasEffect;
     EffectType etype;
-    int value;
+    int val1;
+    int val2;
 } Effect;
 
 class ChainModel{
@@ -74,6 +75,31 @@ public:
         this->hasNote[step] = false;
         return 1;
     }
+    int setEffect(lua_State *L){
+        int step = luaL_checkinteger(L, 1);
+        int col = luaL_checkinteger(L, 2);
+        Effect *efx = &col1[step];
+        if(col == 2){
+            efx = &col2[step];
+        }
+        efx->hasEffect = true;
+        cout << "setting effect type: " << luaL_checkinteger(L, 3)-1 << endl;
+        efx->etype = (EffectType)(luaL_checkinteger(L, 3)-1);
+        efx->val1 = luaL_checkinteger(L, 4);
+        efx->val2 = luaL_checkinteger(L, 5);
+        return 1;
+    };
+    int removeEffect(lua_State *L){
+        int step = luaL_checkinteger(L, 1);
+        int col = luaL_checkinteger(L, 2);
+        Effect *efx = &col1[step];
+        if(col == 2){
+            efx = &col2[step];
+        }
+        efx->hasEffect = false;
+        return 1;
+    };
+    
     ~PhraseModel(){
 	}
     

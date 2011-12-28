@@ -11,7 +11,6 @@ end)
 function ListEditor:setValue(value)
 	self.value = value
 	self.hasVal = true
-	print(self.value)
 	self.string:setValue(self.prefix .. self.list[math.floor(self.value)])
 	self.w, self.h = self.string.w, self.string.h
 	if self.onChange then

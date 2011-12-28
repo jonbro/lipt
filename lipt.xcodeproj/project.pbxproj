@@ -38,7 +38,6 @@
 		5E168E5713E17376009F801A /* ofxSynthDelayLine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5E168D3813E17376009F801A /* ofxSynthDelayLine.cpp */; };
 		5E168E5813E17376009F801A /* ofxSynthEnvelope.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5E168D3A13E17376009F801A /* ofxSynthEnvelope.cpp */; };
 		5E168E5913E17376009F801A /* ofxSynthFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5E168D3C13E17376009F801A /* ofxSynthFilter.cpp */; };
-		5E168E5A13E17376009F801A /* ofxSynthSampler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5E168D3E13E17376009F801A /* ofxSynthSampler.cpp */; };
 		5E168E5B13E17376009F801A /* ofxSynthWaveWriter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5E168D4013E17376009F801A /* ofxSynthWaveWriter.cpp */; };
 		5E168E5C13E17376009F801A /* config in Resources */ = {isa = PBXBuildFile; fileRef = 5E168D4413E17376009F801A /* config */; };
 		5E168E5D13E17376009F801A /* description in Resources */ = {isa = PBXBuildFile; fileRef = 5E168D4513E17376009F801A /* description */; };
@@ -174,6 +173,9 @@
 		5E168EEE13E17396009F801A /* bludPdInstance.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5E168EE413E17396009F801A /* bludPdInstance.cpp */; };
 		5E168EEF13E17396009F801A /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5E168EE613E17396009F801A /* main.mm */; };
 		5E1FB07C148CEB4800F4F885 /* bludWebview.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5E1FB07B148CEB4800F4F885 /* bludWebview.mm */; };
+		5E3A395114AA60EC00DD161D /* Updaters.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5E3A395014AA60EC00DD161D /* Updaters.mm */; };
+		5E3A395414AA638900DD161D /* liptSampler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5E3A395214AA638800DD161D /* liptSampler.cpp */; };
+		5E3A395714AA640100DD161D /* ofxSynthSampler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5E3A395514AA640100DD161D /* ofxSynthSampler.cpp */; };
 		5E43B65A149E3B2600D90A6F /* libPhysicsFS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E43B658149E3B2600D90A6F /* libPhysicsFS.a */; };
 		5E43B65D149E45CA00D90A6F /* PFileSystem.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5E43B65C149E45CA00D90A6F /* PFileSystem.mm */; };
 		5E6C0AAF14616F4400512E52 /* bludGameKit.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5E6C0AAE14616F4400512E52 /* bludGameKit.mm */; };
@@ -305,8 +307,6 @@
 		5E168D3B13E17376009F801A /* ofxSynthEnvelope.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ofxSynthEnvelope.h; path = ../../ofxSynthDev/src/ofxSynthEnvelope.h; sourceTree = SOURCE_ROOT; };
 		5E168D3C13E17376009F801A /* ofxSynthFilter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ofxSynthFilter.cpp; path = ../../ofxSynthDev/src/ofxSynthFilter.cpp; sourceTree = SOURCE_ROOT; };
 		5E168D3D13E17376009F801A /* ofxSynthFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ofxSynthFilter.h; path = ../../ofxSynthDev/src/ofxSynthFilter.h; sourceTree = SOURCE_ROOT; };
-		5E168D3E13E17376009F801A /* ofxSynthSampler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ofxSynthSampler.cpp; path = ../../ofxSynthDev/src/ofxSynthSampler.cpp; sourceTree = SOURCE_ROOT; };
-		5E168D3F13E17376009F801A /* ofxSynthSampler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ofxSynthSampler.h; path = ../../ofxSynthDev/src/ofxSynthSampler.h; sourceTree = SOURCE_ROOT; };
 		5E168D4013E17376009F801A /* ofxSynthWaveWriter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ofxSynthWaveWriter.cpp; path = ../../ofxSynthDev/src/ofxSynthWaveWriter.cpp; sourceTree = SOURCE_ROOT; };
 		5E168D4113E17376009F801A /* ofxSynthWaveWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ofxSynthWaveWriter.h; path = ../../ofxSynthDev/src/ofxSynthWaveWriter.h; sourceTree = SOURCE_ROOT; };
 		5E168D4413E17376009F801A /* config */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = config; path = ../../ofxDspChain/.git/config; sourceTree = SOURCE_ROOT; };
@@ -536,6 +536,12 @@
 		5E168EEB13E17396009F801A /* testApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = testApp.h; path = src/testApp.h; sourceTree = SOURCE_ROOT; };
 		5E1FB07B148CEB4800F4F885 /* bludWebview.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = bludWebview.mm; sourceTree = "<group>"; };
 		5E1FB07D148CEB6E00F4F885 /* bludWebview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bludWebview.h; sourceTree = "<group>"; };
+		5E3A394F14AA5F9C00DD161D /* Updaters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Updaters.h; sourceTree = "<group>"; };
+		5E3A395014AA60EC00DD161D /* Updaters.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Updaters.mm; sourceTree = "<group>"; };
+		5E3A395214AA638800DD161D /* liptSampler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = liptSampler.cpp; sourceTree = "<group>"; };
+		5E3A395314AA638800DD161D /* liptSampler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = liptSampler.h; sourceTree = "<group>"; };
+		5E3A395514AA640100DD161D /* ofxSynthSampler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxSynthSampler.cpp; sourceTree = "<group>"; };
+		5E3A395614AA640100DD161D /* ofxSynthSampler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxSynthSampler.h; sourceTree = "<group>"; };
 		5E43B658149E3B2600D90A6F /* libPhysicsFS.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libPhysicsFS.a; sourceTree = "<group>"; };
 		5E43B659149E3B2600D90A6F /* physfs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = physfs.h; sourceTree = "<group>"; };
 		5E43B65B149E45CA00D90A6F /* PFileSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFileSystem.h; sourceTree = "<group>"; };
@@ -870,6 +876,8 @@
 		5E168D3513E17376009F801A /* src */ = {
 			isa = PBXGroup;
 			children = (
+				5E3A395514AA640100DD161D /* ofxSynthSampler.cpp */,
+				5E3A395614AA640100DD161D /* ofxSynthSampler.h */,
 				5E168D3613E17376009F801A /* ofxSynth.cpp */,
 				5E168D3713E17376009F801A /* ofxSynth.h */,
 				5E168D3813E17376009F801A /* ofxSynthDelayLine.cpp */,
@@ -878,8 +886,6 @@
 				5E168D3B13E17376009F801A /* ofxSynthEnvelope.h */,
 				5E168D3C13E17376009F801A /* ofxSynthFilter.cpp */,
 				5E168D3D13E17376009F801A /* ofxSynthFilter.h */,
-				5E168D3E13E17376009F801A /* ofxSynthSampler.cpp */,
-				5E168D3F13E17376009F801A /* ofxSynthSampler.h */,
 				5E168D4013E17376009F801A /* ofxSynthWaveWriter.cpp */,
 				5E168D4113E17376009F801A /* ofxSynthWaveWriter.h */,
 			);
@@ -1498,6 +1504,10 @@
 		E4D8936A11527B74007E1F53 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				5E3A394F14AA5F9C00DD161D /* Updaters.h */,
+				5E3A395014AA60EC00DD161D /* Updaters.mm */,
+				5E3A395214AA638800DD161D /* liptSampler.cpp */,
+				5E3A395314AA638800DD161D /* liptSampler.h */,
 				5E43B65B149E45CA00D90A6F /* PFileSystem.h */,
 				5E43B65C149E45CA00D90A6F /* PFileSystem.mm */,
 				5E993A28148D1B01002022EB /* bludAnalytics.mm */,
@@ -1708,7 +1718,6 @@
 				5E168E5713E17376009F801A /* ofxSynthDelayLine.cpp in Sources */,
 				5E168E5813E17376009F801A /* ofxSynthEnvelope.cpp in Sources */,
 				5E168E5913E17376009F801A /* ofxSynthFilter.cpp in Sources */,
-				5E168E5A13E17376009F801A /* ofxSynthSampler.cpp in Sources */,
 				5E168E5B13E17376009F801A /* ofxSynthWaveWriter.cpp in Sources */,
 				5E168E7913E17376009F801A /* ofSoundEffect.cpp in Sources */,
 				5E168E7A13E17376009F801A /* ofSoundUnit.cpp in Sources */,
@@ -1813,6 +1822,9 @@
 				5EFF82241499250A00B00678 /* AudioChannel.mm in Sources */,
 				5EFF822814992B2600B00678 /* Player.mm in Sources */,
 				5E43B65D149E45CA00D90A6F /* PFileSystem.mm in Sources */,
+				5E3A395114AA60EC00DD161D /* Updaters.mm in Sources */,
+				5E3A395414AA638900DD161D /* liptSampler.cpp in Sources */,
+				5E3A395714AA640100DD161D /* ofxSynthSampler.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -56,6 +56,9 @@ void Player::tick(){
                 channels[i].setFrequencyMidiNote(phrase->note[phraseStep[i]]);
                 channels[i].trigger();
             }
+            if(phrase->col1[phraseStep[i]].hasEffect){
+                channels[i].processEffect(phrase->col1[phraseStep[i]].etype, phrase->col1[phraseStep[i]].val1, phrase->col1[phraseStep[i]].val2);
+            }
         }
     }
     moveToNextStep();
@@ -176,6 +179,9 @@ void Player::audioRequested( float* buffer, int numFrames, int numChannels ){
             tick();
         }
 	}
+}
+int Player::getTickSampleCount(){
+    return samplesPerTick;
 }
 void Player::setTempo(int tempo){
     // convert the tempo to number of samples

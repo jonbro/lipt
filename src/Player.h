@@ -2,7 +2,9 @@
 
 #include "SongModel.h"
 #include "ofxSynth.h"
+#include "liptSampler.h"
 #include "bludMixer.h"
+
 
 #define NUM_CHANNELS 8
 
@@ -21,9 +23,9 @@ public:
     void    startChan(int chan, int step);
     void    setSong(SongModel *s);
     void    setTempo(int tempo);
-    
-    void		audioRequested( float* buffer, int numFrames, int numChannels );
-    void		setSampleRate(int rate);
+    int     getTickSampleCount();
+    void	audioRequested( float* buffer, int numFrames, int numChannels );
+    void	setSampleRate(int rate);
     
 private:
     // singleton
@@ -33,7 +35,7 @@ private:
     
     bool playing[NUM_CHANNELS];
     bool hasSong;
-    ofxSynthSampler channels[NUM_CHANNELS]; // the synthesizers
+    liptSampler channels[NUM_CHANNELS]; // the synthesizers
     ofSoundMixer *mixer;
     
     int songStep[NUM_CHANNELS]; // where in the song each channel is
