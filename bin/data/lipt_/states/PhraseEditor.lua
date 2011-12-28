@@ -8,6 +8,7 @@ PhraseEditor = class(Group, function(o, root, phraseNum, fromChain, song)
   o.editControl = o:add(EditArea(o.editors, o.song))
   
   o.phrase = song:getPhrase(phraseNum)  -- get the phrase
+  o.phrase.used = true
 
   o.notes = Group()
   o.instruments = Group()
@@ -28,6 +29,7 @@ PhraseEditor = class(Group, function(o, root, phraseNum, fromChain, song)
       else
         o.phrase:set(y-1, 0, newVal)
       end
+      o.song.last_instrument_set = newVal
     end
 
     nedit:setColor(0,0,0,255)
@@ -40,7 +42,12 @@ PhraseEditor = class(Group, function(o, root, phraseNum, fromChain, song)
       if insEdit.hasVal then
         o.phrase:set(y-1, newVal, insEdit:getValue())
       else
-        o.phrase:set(y-1, newVal, 0)
+        -- check to see if there is a last set instrument
+        if o.song.last_instrument_set then
+          insEdit:setValue(o.song.last_instrument_set)
+        else
+          o.phrase:set(y-1, newVal, 0)
+        end
       end
     end
     nedit.onClear = function()

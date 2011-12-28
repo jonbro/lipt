@@ -26,8 +26,10 @@ end
 function LChainModel:loadFrom(data)
 	for i,v in pairs(data.steps) do
 		if v.hasPhrase then
-			print("loading, has phrase")
 			self:set(i, v.phrase)
+			-- mark the phrase and the chain as used
+			self.song.phrases[v.phrase].used = true
+			self.used = true
 		end
 	end	
 end

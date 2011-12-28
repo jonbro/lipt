@@ -184,7 +184,6 @@
 		5E766BA814445D8100CD4EDC /* testApp.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5E766BA714445D8100CD4EDC /* testApp.mm */; };
 		5E7FA40D148E680F009349C7 /* NSData+AESCrypt.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5E7FA40C148E680F009349C7 /* NSData+AESCrypt.mm */; };
 		5E8006BA147541A9005CE4ED /* entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5E8006B9147541A9005CE4ED /* entitlements.plist */; };
-		5E98D590148F9362006C0FCA /* Default-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E98D58F148F9362006C0FCA /* Default-Portrait~ipad.png */; };
 		5E993A24148D16D9002022EB /* libFlurryAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E993A23148D16D9002022EB /* libFlurryAnalytics.a */; };
 		5E993A29148D1B01002022EB /* bludAnalytics.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5E993A28148D1B01002022EB /* bludAnalytics.mm */; };
 		5EC4AD62147BA94A00F3794C /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EC4AD61147BA94A00F3794C /* AVFoundation.framework */; };
@@ -556,10 +555,6 @@
 		5E7FA40C148E680F009349C7 /* NSData+AESCrypt.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "NSData+AESCrypt.mm"; sourceTree = "<group>"; };
 		5E7FA40E148E682B009349C7 /* NSData+AESCrypt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+AESCrypt.h"; sourceTree = "<group>"; };
 		5E8006B9147541A9005CE4ED /* entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = entitlements.plist; sourceTree = "<group>"; };
-		5E98D58F148F9362006C0FCA /* Default-Portrait~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait~ipad.png"; sourceTree = "<group>"; };
-		5E98D591148F9369006C0FCA /* icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-72.png"; sourceTree = "<group>"; };
-		5E98D593148F9378006C0FCA /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
-		5E98D595148F940F006C0FCA /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
 		5E993A22148D16D9002022EB /* FlurryAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlurryAnalytics.h; sourceTree = "<group>"; };
 		5E993A23148D16D9002022EB /* libFlurryAnalytics.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurryAnalytics.a; sourceTree = "<group>"; };
 		5E993A26148D171F002022EB /* bludAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bludAnalytics.h; sourceTree = "<group>"; };
@@ -645,10 +640,6 @@
 			isa = PBXGroup;
 			children = (
 				5E43B657149E3B2600D90A6F /* PhysicsFS */,
-				5E98D595148F940F006C0FCA /* Icon-72.png */,
-				5E98D593148F9378006C0FCA /* Icon.png */,
-				5E98D591148F9369006C0FCA /* icon-72.png */,
-				5E98D58F148F9362006C0FCA /* Default-Portrait~ipad.png */,
 				5E7226F81476DBC3009FFF99 /* libTestFlight.a */,
 				5EC68F8F145DB7F30027A4CD /* libcurl.a */,
 				5E022261145DAFC800D67FEF /* curl */,
@@ -1667,7 +1658,6 @@
 				5E168E9813E17376009F801A /* rev3~.pd in Resources */,
 				5E168E9913E17376009F801A /* stdout-help.pd in Resources */,
 				5E8006BA147541A9005CE4ED /* entitlements.plist in Resources */,
-				5E98D590148F9362006C0FCA /* Default-Portrait~ipad.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1844,8 +1834,8 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Jonathan Brodsky (6WUD4644W2)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jonathan Brodsky (6WUD4644W2)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = iPhone_Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
@@ -1867,8 +1857,8 @@
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "${TARGET_NAME}";
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				PROVISIONING_PROFILE = "768E1D37-5A93-413D-8FE3-E4F00B5FD4A2";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "768E1D37-5A93-413D-8FE3-E4F00B5FD4A2";
 				SKIP_INSTALL = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = armv7;
@@ -1879,8 +1869,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Jonathan Brodsky (6WUD4644W2)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jonathan Brodsky (6WUD4644W2)";
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = iPhone_Prefix.pch;
@@ -1903,8 +1893,8 @@
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "${TARGET_NAME}";
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				PROVISIONING_PROFILE = "768E1D37-5A93-413D-8FE3-E4F00B5FD4A2";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "768E1D37-5A93-413D-8FE3-E4F00B5FD4A2";
 				SKIP_INSTALL = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = armv7;
@@ -1945,8 +1935,8 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CODE_SIGN_ENTITLEMENTS = entitlements.plist;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Jonathan Brodsky (6WUD4644W2)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jonathan Brodsky (6WUD4644W2)";
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = iPhone_Prefix.pch;
@@ -1969,8 +1959,8 @@
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "${TARGET_NAME}";
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				PROVISIONING_PROFILE = "768E1D37-5A93-413D-8FE3-E4F00B5FD4A2";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "768E1D37-5A93-413D-8FE3-E4F00B5FD4A2";
 				SKIP_INSTALL = NO;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = armv7;

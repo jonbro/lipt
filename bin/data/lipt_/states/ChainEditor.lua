@@ -8,7 +8,9 @@ ChainEditor = class(Group, function(o, root, chainNum)
 	o.editControl = o:add(EditArea(o.editors))
 	o.chainNum = chainNum
 	o.chain = song:getChain(chainNum)  -- gets a chain
-
+	print("loading chain", chainNum)
+	-- since we are viewing the chain, we should mark it as used
+	o.chain.used = true
 	o.root = root
 	local size = Vec2(60, 60)
 	if not retina then size:mult(0.5) end
@@ -39,6 +41,14 @@ ChainEditor = class(Group, function(o, root, chainNum)
 		      o.chain:clearStep(j)
 		      e:clearValue()
 		    end
+		    e.onClone = function()
+		    	local phrase_old = song:getPhrase(o.editControl.currentEdit:getValue())
+		    	local new_phrase_num = song:nextFreePhrase()
+		    	local phrase_new = song:getPhrase(new_phrase_num)
+		    	phrase_new:loadFrom(phrase_old:saveTo({}))
+		    	phrase_new.used = true
+		    	e:setValue(new_phrase_num)
+			end
 
 		end
 	end

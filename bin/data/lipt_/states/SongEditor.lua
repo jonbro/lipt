@@ -39,6 +39,13 @@ SongEditor = class(Group, function(o, root)
 		      o.song:clearChain(j, i)
 		      e:clearValue()
 		    end
+		    e.onClone = function()
+		    	local chain_old = song:getChain(o.editControl.currentEdit:getValue())
+		    	local new_chain_num = song:nextFreeChain()
+		    	local chain_new = song:getChain(song:nextFreeChain())
+		    	chain_new:loadFrom(chain_old:saveTo({}))
+		    	e:setValue(new_chain_num)
+			end
 		end
 	end
 	

@@ -19,7 +19,6 @@ void liptSampler::processEffect(EffectType effect, int val1, int val2){
             float speed = val1; // this is the distance that we need to move
             speed = (speed==0)?0:fabs(targetVolume-renderParams.volume_)/(Player::getInstance()->getTickSampleCount()*val1);
             renderParams.volumeRamp_.setData(targetVolume, speed, renderParams.volume_);
-            cout << "vol effect speed: " << speed << " targetVolume: " << targetVolume << endl;
             if (!renderParams.volumeRamp_.Enabled()) {
                 renderParams.volumeRamp_.Enable();
             }

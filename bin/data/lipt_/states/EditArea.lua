@@ -1,3 +1,4 @@
+print("test")
 -- the edit area manages changing a bunch of values if they are on the screen
 -- TODO: put the copy paste stuff in here
 EditArea = class(Group, function(o, editors, song)
@@ -14,6 +15,17 @@ EditArea = class(Group, function(o, editors, song)
   end
   o.clear.scrollFactor = Vec2(0,0)
   o.clear:setLayer(2)
+  print("loading edit area")
+  -- add a clone button
+  o.clone = o:add(RoundedButton(o.clear.pos.x+o.clear.w,bludG.camera.h-80, 80, 80, "CLN"))
+    o.clone.onPress = function()
+      print("calling on clone")
+      if o.currentEdit and o.currentEdit.onClone then
+        o.currentEdit.onClone()
+      end
+    end
+    o.clone.scrollFactor = Vec2(0,0)
+    o.clone:setLayer(2)
 
 end)
 function EditArea:drawBg()

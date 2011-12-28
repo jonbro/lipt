@@ -35,6 +35,20 @@ LSongModel = class(function(o, songData)
 	o.samples = {} -- hold lua refs to the samples that we have loaded so far
 	o.tempo = 120
 end)
+function LSongModel:nextFreeChain()
+	for i=0,numDatas-1 do
+		if not self.chains[i].used then
+			return i
+		end
+	end
+end
+function LSongModel:nextFreePhrase()
+	for i=0,numDatas-1 do
+		if not self.phrases[i].used then
+			return i
+		end
+	end
+end
 function LSongModel:clearChain(position, channel)
 	self.songData:clearChain(channel, position)
 	self.channels[channel][position].hasChain = false

@@ -7,6 +7,8 @@
 //--------------------------------------------------------------
 void testApp::setup(){
         
+//    [TestFlight takeOff:@"d3ff982777d98a3efd2774643dcf2b07_MzU3MjAxMS0xMC0wMyAwNjowNTo1MS43NjAxOTg"];
+    
     int startTime = ofGetElapsedTimeMillis();
     cout << "start time: " << startTime << endl;
     ofRegisterTouchEvents(this);
@@ -15,18 +17,7 @@ void testApp::setup(){
     ofxiPhoneSetOrientation(OFXIPHONE_ORIENTATION_PORTRAIT);
     int ticksPerBuffer = 4;	// 8 * 64 = buffer len of 1024
     
-	pd = bludPdInstance::getInstance();
-	if(!pd->init(2, 0, 22050, ticksPerBuffer)) {
-		ofLog(OF_LOG_ERROR, "Could not init pd");
-		OF_EXIT_APP(1);
-	}
-	pd->dspOn();
-	Patch patch = pd->openPatch("lipt_/pd_audio/main_audio.pd");
     
-	cout << patch << endl;
-    cout << "loaded pd: " << ofGetElapsedTimeMillis() - startTime << endl;
-
-    cout << "loaded soundstream: " << ofGetElapsedTimeMillis() - startTime << endl;
 
     
     blud.setup();
@@ -43,7 +34,7 @@ void testApp::setup(){
     dir.listDir([filePath UTF8String]);
     vector<ofFile> files = dir.getFiles();
     for(int i = 0; i < (int)files.size(); i++) {
-        cout << "zip in documents: " << files[i].getAbsolutePath().c_str() << endl;
+//        cout << "zip in documents: " << files[i].getAbsolutePath().c_str() << endl;
         int e = PHYSFS_mount(files[i].getAbsolutePath().c_str(),"", 1);
         if(e==0){
             cout << "error mounting: " << PHYSFS_getLastError() << endl;
