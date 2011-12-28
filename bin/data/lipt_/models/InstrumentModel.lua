@@ -25,7 +25,7 @@ function LInstrumentModel:setSample(sample)
 end
 function LInstrumentModel:setLoopMode(value)
 	print("setting loop mode", value)
-	self.iData:setLoopMode(value-1)
+	self.iData:setLoopMode(value)
 	self.loopMode = value
 end
 function LInstrumentModel:saveTo(data)

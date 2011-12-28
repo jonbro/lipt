@@ -9,6 +9,7 @@ ListEditor = class(ByteEditor, function(o, x, y, root, list, prefix)
 end)
 
 function ListEditor:setValue(value)
+	print("setting val", value)
 	self.value = value
 	self.hasVal = true
 	self.string:setValue(self.prefix .. self.list[math.floor(self.value)])

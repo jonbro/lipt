@@ -34,7 +34,7 @@ InstrumentEditor = class(Group, function(o, instNum, phraseNum, song)
 
 	-- todo: add all of the other instrument editor things
 	-- back to phrase button
-	o.toPhrase = o:add(RoundedButton(bludG.camera.w-80, 0, 80, 80, "P"))
+	o.toPhrase = o:add(RoundedButton(0, 0, 80, 80, "P"))
 	o.toPhrase.scrollFactor = Vec2(0,0)	
 	o.toPhrase.onPress = function()
 		mainState.edit = mainState:replaceState(mainState.edit, PhraseEditor(nil, o.fromPhrase, 0, song))

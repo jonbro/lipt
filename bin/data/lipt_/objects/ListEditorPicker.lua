@@ -25,10 +25,10 @@ function ListEditorPicker:buildSelectors(x, y)
 	bg.cameras = {self.menuCamera}
 	bg.bg = true
 	local i = 3
-	print(self.list[j])
 	-- for i=1,5 do
 		for j=1,5 do
-			local so = self.sos:add(StringObject(sCenter.x+self.size.x*i, sCenter.y+self.size.y*j, self.list[(y+j+1)%(#self.list)+1]))
+			-- -2 + 3
+			local so = self.sos:add(StringObject(sCenter.x+self.size.x*i, sCenter.y+self.size.y*j, self.list[(y+j)%(#self.list)+1]))
 			so:setLayer(4)
 			local dist = so.pos:distance(Vec2(sCenter.x+center.x, sCenter.y+center.y))
 			if i == 3 and j == 3 then
@@ -42,12 +42,10 @@ function ListEditorPicker:buildSelectors(x, y)
 end
 
 function ListEditorPicker:getValue()
-	local rval = (self.selCenter.y)%(#self.list)
-	if rval == 0 then return #self.list end
+	local rval = (self.selCenter.y+1)%(#self.list)+1
 	return rval
 end
 
 function ListEditorPicker:setValue(val)
-	print("setting", val)
-	self.selCenter = Vec2(0, val%#self.list-1)
+	self.selCenter = Vec2(0, val%#self.list-2)
 end

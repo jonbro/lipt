@@ -1,4 +1,4 @@
-local effectTypes = {"---", "VOL"}
+local effectTypes = {"----", "VOLM", "PLOF"}
 -- this is the song editor. Should probably change the language here to reflect that
 PhraseEditor = class(Group, function(o, root, phraseNum, fromChain, song)
   Group.init(o)
@@ -52,9 +52,16 @@ PhraseEditor = class(Group, function(o, root, phraseNum, fromChain, song)
     local efx1 = o.editors:add(ListEditor(insEdit.pos.x+insEdit.w+padding, nedit.pos.y, {}, effectTypes))
     local efxbyte1 = o.editors:add(ByteEditor(efx1.pos.x+efx1.w+padding/2, nedit.pos.y, o.root))
     local efxbyte2 = o.editors:add(ByteEditor(efxbyte1.pos.x+efxbyte1.w, nedit.pos.y, o.root))
+    -- print(y-1, o.phrase.steps[y-1].hasEffect1)
+    if o.phrase.steps[y-1].hasEffect1 then
+      efx1:setValue(o.phrase.steps[y-1].effect1Type+1)
+      efxbyte1:setValue(o.phrase.steps[y-1].effect1Val1)
+      efxbyte2:setValue(o.phrase.steps[y-1].effect1Val2)
+    end
+
     -- the storage is handled higher up, this just bundles up all of the changes and chucks them over to c
     efx1.onChange = function(newVal)
-      o.phrase:setEffect(y-1, 1, efx1:getValue(), efxbyte1:getValue(), efxbyte2:getValue())
+      o.phrase:setEffect(y-1, 1, efx1:getValue()-1, efxbyte1:getValue(), efxbyte2:getValue())
     end
     efxbyte1.onChange = efx1.onChange
     efxbyte2.onChange = efx1.onChange

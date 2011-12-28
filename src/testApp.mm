@@ -33,6 +33,23 @@ void testApp::setup(){
     
     // setup the physicsfs first so that lua has access to it
     PHYSFS_init(NULL);
+    
+    // bring all the zip files in the documents directory into physfs
+    ofDirectory dir;
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+	NSString *documentsDirectory = [paths objectAtIndex:0];
+	NSString *filePath = [documentsDirectory stringByAppendingPathComponent:@"/"];
+    dir.allowExt("zip");
+    dir.listDir([filePath UTF8String]);
+    vector<ofFile> files = dir.getFiles();
+    for(int i = 0; i < (int)files.size(); i++) {
+        cout << "zip in documents: " << files[i].getAbsolutePath().c_str() << endl;
+        int e = PHYSFS_mount(files[i].getAbsolutePath().c_str(),"", 1);
+        if(e==0){
+            cout << "error mounting: " << PHYSFS_getLastError() << endl;
+        }
+    }
+    // bring in the default samplelib
     int e = PHYSFS_mount(ofToDataPath("sampleLib.zip").c_str(),"", 1);
     if(e==0){
         cout << "error mounting: " << PHYSFS_getLastError() << endl;

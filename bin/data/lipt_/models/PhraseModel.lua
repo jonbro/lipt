@@ -1,4 +1,4 @@
-local effectTypes = {"---", "VOL"}
+local effectTypes = {"----", "VOLM", "PLOF"}
 numPositions = 16
 LPhraseModel = class(function(o, phraseData, song)
 	o.phraseData = phraseData
@@ -25,7 +25,9 @@ end)
 
 function LPhraseModel:set(step, value, instrument)
 	self.phraseData:set(step, value, instrument)
-	self.steps[step] = {hasNote=true,note=value, instrument=instrument}
+	self.steps[step].hasNote=true;
+	self.steps[step].note=value;
+	self.steps[step].instrument=instrument
 	self.song.last_note = value
 end
 function LPhraseModel:clearNote(step)
@@ -42,7 +44,7 @@ function LPhraseModel:setEffect(step, column, effectType, val1, val2)
 		self.steps[step]["effect" .. column .. "Type"] = effectType
 		self.steps[step]["effect" .. column .. "Val1"] = val1
 		self.steps[step]["effect" .. column .. "Val2"] = val2
-		self.phraseData:setEffect(step, column, effectType-1, val1, val2)
+		self.phraseData:setEffect(step, column, effectType, val1, val2)
 	end
 end
 function LPhraseModel:saveTo(data)
@@ -56,6 +58,7 @@ function LPhraseModel:loadFrom(data)
 		end
 		-- set the effects if the data has them
 		if v.hasEffect1 then
+			print("loading effect")
 			self:setEffect(i, 1, v.effect1Type, v.effect1Val1, v.effect1Val2)
 		end
 		if v.hasEffect2 then

@@ -1,25 +1,24 @@
+- setting a note should automatically set the last instrument
+- add a setting for the base volume
 - manage the screens as a stack, only render the object that is on the top of the stack, then switching screens will just be a matter of adding and removing to the stack, will maintain state
-- add the different loop types from piggy
-- start a git repo for this project
 - bring the camera back to the last point it was when you were on that screen
 - setting a chain should default to the last chain set
 - setting a phrase ..
-- setting a note should automatically set the last instrument
-- load any zip files that are in the documents directory into physfs
 - song selector
-- speed selector
 - sample timing trigger fix
 - cloning phrases
 - cloning chains
 - load up a few of the default piggy sample packs
 - stop running phrases
 - start running phrases in sync
+- add the sync loop type
+- add an editor for the looppoint
+- make the color scheme editable
 
 - copy samples from one folder to another (should use physfs file handles)
 
 - edge to edge slide to switch screens
 - add a playhead indicator
-x two byte editor (FFFF) (not doing that, just going to have two of the byte editors)
 - effect editor (pull from array of different effect types)
 - one byte editor, fix hori - 16 edit
 - nonedit, one byte for line display
@@ -27,7 +26,14 @@ x two byte editor (FFFF) (not doing that, just going to have two of the byte edi
 - synth implementation
 - load some samples by default
 
+x add a button to run the whole row
+x load any zip files that are in the documents directory into physfs
+x make the list editor and list picker actually work properly
+x make the effects columns load from the phrase data
+x start a git repo for this project
 x make the instrument not fail if the sample is defined but not loaded
+x add the different loop types from piggy
+x speed selector
 x store the song on quit
 x saving
 x sample loading
@@ -52,45 +58,4 @@ x erase song steps
 x clear the sample touch down on a certain amount of drag
 x add a back button to the sample selector
 x bpm / song editor
-
-structure
-- root. contains the core bpm, and name of the project. This is how the samples are looked up.
-- channels. contain a list of chains, and also contain a reference to a synth.
-			These are the synthesizers. They can play one sample ocilator at a time.
-			contains the current executing groove for the channel.
-
-- instruments. contains the default settings for the instrument, the sample reference and name.
-
-audio engine
-
-- parameters
-channels // the synthesizers
-songStep // where in the song each channel is
-currentChain // the currently playing chain for each channel... incase things get deleted while playing
-chainStep // where in the chain each channel is
-currentPhrase // the currently playing phrase in the channel
-phraseStep // where in the phrase the channel is
-
-- functions
-tick() // moves everything forward one step
-start() // kills all the channels
-stop()
-
-
-from lua, I should do something like this
-
-player = Player()
-song = Song() 				-- contains all of the song data. This is a more lua-y object
-song:setChain(0, 0, 0)   	-- sets a channel position to a chain
-chain = song:getChain(0) 	-- gets a chain
-chain:set(0, 0, 0)			-- set chain to phrase and transpose at position
-
-sample = SampleData()
-sample:loadSample(blud.doc_root .. "/test/test.wav")
-instrument = song:getInstrument(0)
-instrument:setSample(sample)
-
-phrase = song:getPhrase(0)	-- get the phrase
-phrase:set(0, 0)			-- set the note, instrument, and effects (to come)
-
-player:loadSong(song)
+x two byte editor (FFFF) (not doing that, just going to have two of the byte editors)

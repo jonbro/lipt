@@ -55,6 +55,7 @@ SongEditor = class(Group, function(o, root)
 		mainState.edit = mainState:replaceState(mainState.edit, ChainEditor(o.root, o.editControl.currentEdit:getValue()))
 	end
 	o.showingPhrase = false
+
 	o.runPhrase = o:add(RoundedButton(bludG.camera.w-80,bludG.camera.h-80, 80, 80, "Run"))
 	o.runPhrase.onPress = function()
 		if o.editControl.currentEdit then
@@ -63,6 +64,18 @@ SongEditor = class(Group, function(o, root)
 	end
 	o.runPhrase.scrollFactor = Vec2(0,0)
 	o.runPhrase:setLayer(2)
+
+	o.runRow = o:add(RoundedButton(o.runPhrase.pos.x-80,bludG.camera.h-80, 80, 80, "Row"))
+	o.runRow.onPress = function()
+		if o.editControl.currentEdit then
+			for i=0,numChannels-1 do
+				player:startChan(i, o.editControl.currentEdit.position)
+			end
+		end
+	end
+	o.runRow.scrollFactor = Vec2(0,0)
+	o.runRow:setLayer(2)
+	
 end)
 
 function SongEditor:update()

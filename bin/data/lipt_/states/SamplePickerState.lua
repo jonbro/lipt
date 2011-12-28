@@ -78,6 +78,8 @@ function SamplePickerState:loadDirList(instrument, directoryStack)
     	function fbutton:onPress()
     		-- replace the current view on the stack, move up one folder
     		table.remove(directoryStack)
+    		-- reset the camera
+    		bludG.camera.scroll.x, bludG.camera.scroll.y = 0, 0
     		mainState.edit = mainState:replaceState(mainState.edit, SamplePickerState(instrument, directoryStack))
     	end
 	end
@@ -91,6 +93,8 @@ function SamplePickerState:loadDirList(instrument, directoryStack)
         		-- load the sample in the instrument and jump back to the instrument screen
         		-- TODO: get the jumping back to the instrument
    				instrument:setSample(file)
+        		-- reset the camera
+        		bludG.camera.scroll.x, bludG.camera.scroll.y = 0, 0
    				mainState = PlayState()
         	end
         elseif fs:isDirectory(file) then
@@ -98,6 +102,8 @@ function SamplePickerState:loadDirList(instrument, directoryStack)
         	function fbutton:onPress()
         		-- replace the current view on the stack, with a new view for this new folder
         		table.insert(directoryStack, v)
+        		-- reset the camera
+        		bludG.camera.scroll.x, bludG.camera.scroll.y = 0, 0
         		mainState.edit = mainState:replaceState(mainState.edit, SamplePickerState(instrument, directoryStack))
         	end
         end
