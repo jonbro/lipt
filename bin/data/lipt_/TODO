@@ -1,8 +1,7 @@
-x add in the testflight sdk
-x setting a note should automatically set the last instrument
-x cloning phrases
-x cloning chains
-- should default to loop mode "none"
+x should default to loop mode "none"
+- make the second column effect column work
+- should be able to clear effects
+
 - make the transpose column work
 - stop running phrases
 - start running phrases in sync
@@ -26,3 +25,10 @@ x cloning chains
 - instrument editor
 - synth implementation
 - load some samples by default
+
+x add in the testflight sdk
+x setting a note should automatically set the last instrument
+x cloning phrases
+x cloning chains
+x add the sync loopmode
+x make the PLOF work

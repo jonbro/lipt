@@ -1,8 +1,9 @@
 LInstrumentModel = class(function(o, iData, song)
 	o.song = song
 	o.iData = iData
-	o.loopMode = 2
-	o.loopModes = {"none", "loop"}
+	o.loopMode = 1
+	o:setLoopMode(o.loopMode)
+	o.loopModes = {"none", "loop", "loopsync"}
 end)
 
 -- takes a filename
@@ -24,7 +25,6 @@ function LInstrumentModel:setSample(sample)
 	self.sampleName = sample
 end
 function LInstrumentModel:setLoopMode(value)
-	print("setting loop mode", value)
 	self.iData:setLoopMode(value)
 	self.loopMode = value
 end

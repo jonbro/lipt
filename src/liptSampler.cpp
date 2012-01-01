@@ -25,6 +25,20 @@ void liptSampler::processEffect(EffectType effect, int val1, int val2){
             // trigger once to get rid of th clipping at the beginning
             break;
         }
+        case PLOF:
+        {
+            // jumps to the position in the sample specified
+            // should make it respect the loop points, once those are actually implemented
+            if(val2==0){
+                int targetPosition = (float)val1/256.0*sample->length;
+                if(sampleLoaded)
+                    position = targetPosition;
+            }else{
+                int targetPosition = (float)val1/256.0*sample->length;
+                if(sampleLoaded)
+                    position = (sample->length-targetPosition)%sample->length;
+            }
+        }
         default:
             break;
     }
@@ -69,6 +83,13 @@ void liptSampler::audioRequested( float* buffer, int numFrames, int numChannels 
 }
 void liptSampler::setFrequencyMidiNote(float note){
 	currentFrequency = pow(2.0, (note-60.0)/12.0f);
+    // this is the sync to loop length calculation
+    if(loopType == LOOPSYNC){
+
+        float offset = 16.0 / currentFrequency; // multiplying by 16 because that is the number of ticks per measure currently, and then the octaves double or half the speed
+        currentFrequency = sample->length/(Player::getInstance()->getTickSampleCount()*offset); 
+//        currentFrequency = currentFrequency*2.0;
+    }
 }
 void liptSampler::setFrequencySyncToLength(int length){
 	currentFrequency = sample->length/(float)length;
@@ -99,7 +120,7 @@ double liptSampler::play4(double frequency, double start, double end) {
 			position=start;
 		}
 		if ( position >= end ){
-			if (loopType == 1) {
+			if (loopType == SINGLE) {
 				playing = false;
 			}
 			position = start;
@@ -182,7 +203,7 @@ void liptSampler::play(float frequency, float start, float end, float &fill) {
 		}
 		
 		if ( position >= end ){
-			if (loopType == 1) {
+			if (loopType == SINGLE) {
 				playing = false;
 			}
 			position = start;

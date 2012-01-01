@@ -83,6 +83,16 @@ SongEditor = class(Group, function(o, root)
 	o.runRow.scrollFactor = Vec2(0,0)
 	o.runRow:setLayer(2)
 	
+	-- a button to render out a chunk of the song to a wav file
+	-- should probably replace this with something that just renders the highlighted
+	-- section once I have the highlighter enabled
+	o.renderButton = o:add(RoundedButton(bludG.camera.w/2-40, 0, 80,80, "OUT"))
+	o.renderButton.onPress = function()
+		player:render(blud.doc_root .. "/out_" .. os.time() .. ".wav")
+	end
+	o.renderButton.scrollFactor = Vec2(0,0)
+	o.renderButton:setLayer(2)
+	
 end)
 
 function SongEditor:update()

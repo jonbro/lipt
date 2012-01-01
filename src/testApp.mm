@@ -65,7 +65,7 @@ void testApp::setup(){
 	cout << blud.executeFile("lipt_/core.lua") << endl; // this returns an error code for the compiled code
     cout << "loaded blud: " << ofGetElapsedTimeMillis() - startTime << endl;
     player = Player::getInstance();
-	mixer = bludMixer::getInstance();
+	mixer = liptMixer::getOutput();
     ofSoundStreamSetup(2,0,this, 44100, ofxPd::getBlockSize()*ticksPerBuffer, 4);
 }
 

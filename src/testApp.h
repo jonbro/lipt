@@ -42,7 +42,7 @@ class testApp : public ofxiPhoneApp{
 		ofxPd *pd;
 //      ofImage test;
         Player *player;
-        ofSoundMixer *mixer;
+        ofSoundSource *mixer;
 };
 
 #endif

@@ -6,6 +6,7 @@ Lunar<tPlayer>::RegType tPlayer::methods[] = {
 	method(tPlayer,setSong),
 	method(tPlayer,startChan),
     method(tPlayer, setTempo),
+    method(tPlayer, render),
 	{0,0}
 };
 
@@ -16,7 +17,7 @@ Player* Player::instance = NULL;
 Player::Player(){
     sampleCount = 0;
     hasSong = false;
-    mixer = bludMixer::getInstance();
+    mixer = liptMixer::getInstance();
     for (int i=0; i<NUM_CHANNELS; i++) {
         playing[i] = false;
         // setup the samplers
@@ -49,6 +50,7 @@ void Player::tick(){
                     channels[i].loadSample(inst.sample);
                     channels[i].setLoopPoints(0, 1);
                     channels[i].setLoopType(inst.loopMode);
+                    cout << "setting loop type: " << inst.loopMode << endl;
                 }
             }
             if(phrase->hasNote[phraseStep[i]]){
@@ -183,6 +185,23 @@ void Player::audioRequested( float* buffer, int numFrames, int numChannels ){
 int Player::getTickSampleCount(){
     return samplesPerTick;
 }
+
+void Player::render(string output){
+    // make sure that we arn't rendering already
+    if(!rendering){
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *documentsDirectory = [paths objectAtIndex:0];
+        NSString *filePath = [documentsDirectory stringByAppendingPathComponent:@"/out.wav"];
+
+        // setup a wave writer
+        liptMixer::startRecording(output);
+        rendering = true;
+    }else{
+        liptMixer::stopRecording();
+        rendering = false;
+    }
+}
+
 void Player::setTempo(int tempo){
     // convert the tempo to number of samples
     float clockMult = 4; // because we are doing quarter notes as beats, we need to divide by four

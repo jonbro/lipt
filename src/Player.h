@@ -3,8 +3,8 @@
 #include "SongModel.h"
 #include "ofxSynth.h"
 #include "liptSampler.h"
-#include "bludMixer.h"
-
+#include "liptMixer.h"
+#include "WavFile.h"
 
 #define NUM_CHANNELS 8
 
@@ -26,6 +26,7 @@ public:
     int     getTickSampleCount();
     void	audioRequested( float* buffer, int numFrames, int numChannels );
     void	setSampleRate(int rate);
+    void    render(string output);
     
 private:
     // singleton
@@ -45,6 +46,13 @@ private:
     int phraseStep[NUM_CHANNELS]; // where in the phrase the channel is
     
     int sampleRate, sampleCount, samplesPerTick;
+    
+    // for handling rendering
+    WavFile *renderOut;
+    bool rendering;
+    int renderFramesRemaining;
+    float *renderData;
+    ofxSynthWaveWriter *writer;
 };
 
 class tPlayer{
@@ -66,6 +74,10 @@ public:
         p->setTempo(luaL_checknumber(L, 1));
         return 1;
     };
+    int render(lua_State *L){
+        p->render(luaL_checkstring(L, 1));
+        return 1;
+    }
 private:
     Player *p;
 };

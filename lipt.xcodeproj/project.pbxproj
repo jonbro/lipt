@@ -178,6 +178,7 @@
 		5E3A395714AA640100DD161D /* ofxSynthSampler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5E3A395514AA640100DD161D /* ofxSynthSampler.cpp */; };
 		5E43B65A149E3B2600D90A6F /* libPhysicsFS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E43B658149E3B2600D90A6F /* libPhysicsFS.a */; };
 		5E43B65D149E45CA00D90A6F /* PFileSystem.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5E43B65C149E45CA00D90A6F /* PFileSystem.mm */; };
+		5E6A3FD014B1092500AA2413 /* liptMixer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5E6A3FCF14B1092500AA2413 /* liptMixer.cpp */; };
 		5E6C0AAF14616F4400512E52 /* bludGameKit.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5E6C0AAE14616F4400512E52 /* bludGameKit.mm */; };
 		5E6C0AB114616FD500512E52 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E6C0AB014616FD500512E52 /* GameKit.framework */; };
 		5E7226F91476DBC3009FFF99 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E7226F81476DBC3009FFF99 /* libTestFlight.a */; };
@@ -545,6 +546,9 @@
 		5E43B659149E3B2600D90A6F /* physfs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = physfs.h; sourceTree = "<group>"; };
 		5E43B65B149E45CA00D90A6F /* PFileSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFileSystem.h; sourceTree = "<group>"; };
 		5E43B65C149E45CA00D90A6F /* PFileSystem.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PFileSystem.mm; sourceTree = "<group>"; };
+		5E6A3FCD14B1030E00AA2413 /* WavFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WavFile.h; sourceTree = "<group>"; };
+		5E6A3FCE14B108B100AA2413 /* liptMixer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = liptMixer.h; sourceTree = "<group>"; };
+		5E6A3FCF14B1092500AA2413 /* liptMixer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = liptMixer.cpp; sourceTree = "<group>"; };
 		5E6C0A93146056EB00512E52 /* bludAsyncCurl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bludAsyncCurl.h; sourceTree = "<group>"; };
 		5E6C0AAD14616F4300512E52 /* bludGameKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bludGameKit.h; sourceTree = "<group>"; };
 		5E6C0AAE14616F4400512E52 /* bludGameKit.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = bludGameKit.mm; sourceTree = "<group>"; };
@@ -1532,6 +1536,9 @@
 				5EFF82251499251C00B00678 /* AudioChannel.h */,
 				5EFF822614992B2500B00678 /* Player.h */,
 				5EFF822714992B2600B00678 /* Player.mm */,
+				5E6A3FCD14B1030E00AA2413 /* WavFile.h */,
+				5E6A3FCE14B108B100AA2413 /* liptMixer.h */,
+				5E6A3FCF14B1092500AA2413 /* liptMixer.cpp */,
 			);
 			path = src;
 			sourceTree = SOURCE_ROOT;
@@ -1815,6 +1822,7 @@
 				5E3A395114AA60EC00DD161D /* Updaters.mm in Sources */,
 				5E3A395414AA638900DD161D /* liptSampler.cpp in Sources */,
 				5E3A395714AA640100DD161D /* ofxSynthSampler.cpp in Sources */,
+				5E6A3FD014B1092500AA2413 /* liptMixer.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

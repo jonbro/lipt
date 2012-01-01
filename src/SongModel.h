@@ -4,6 +4,7 @@
 
 enum EffectType{
     VOL = 0,
+    PLOF,
     PTCH
 };
 
@@ -148,7 +149,7 @@ public:
         return 1;
     }
     int setLoopMode(lua_State *L){
-        loopMode = luaL_checknumber(L, 1);
+        loopMode = luaL_checknumber(L, 1)-1;
         return 1;
     }
     ~InstrumentModel(){
@@ -204,7 +205,6 @@ public:
         Lunar<PhraseModel>::push(L, phrase);
         return 1;
     }
-    
   
     ~SongModel(){
 	}
