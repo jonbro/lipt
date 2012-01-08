@@ -1,4 +1,4 @@
-local effectTypes = {"----", "VOLM", "PLOF"}
+local effectTypes = {"----", "VOLM", "PLOF", "PTCH"}
 numPositions = 16
 LPhraseModel = class(function(o, phraseData, song)
 	o.phraseData = phraseData

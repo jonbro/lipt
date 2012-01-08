@@ -1,4 +1,4 @@
-local effectTypes = {"----", "VOLM", "PLOF"}
+local effectTypes = {"----", "VOLM", "PLOF", "PTCH"}
 -- this is the song editor. Should probably change the language here to reflect that
 PhraseEditor = class(Group, function(o, root, phraseNum, fromChain, song)
   Group.init(o)

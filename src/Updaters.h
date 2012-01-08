@@ -34,3 +34,16 @@ private:
 	float target_ ;
 	float speed_ ;
 } ;
+
+class PitchRamp : public Updater {
+public:
+	PitchRamp() {} ;
+    ~PitchRamp() {} ;
+	void setData(float target,float speed,float start);
+	virtual void Trigger(bool tableTick) ;
+	virtual void UpdateSRP(struct InstrumentParams &rup);
+private:
+	float current_ ;
+	float target_ ;
+	float speed_ ;
+} ;

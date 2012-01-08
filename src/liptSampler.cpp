@@ -25,6 +25,24 @@ void liptSampler::processEffect(EffectType effect, int val1, int val2){
             // trigger once to get rid of th clipping at the beginning
             break;
         }
+        case PTCH:
+        {
+            float targetPitch = ((float)val2);
+            // convert the pitch to a frequency
+            if(targetPitch > 128.0){
+                targetPitch = targetPitch-256.0;
+            }
+            targetPitch = frequencyFromNote(renderParams.pitch_+targetPitch);
+                
+            float speed = val1; // this is the distance that we need to move
+            speed = (speed==0)?0:fabs(targetPitch-frequencyFromNote(renderParams.pitch_))/(Player::getInstance()->getTickSampleCount()*val1);
+            renderParams.pitchRamp_.setData(targetPitch, speed, frequencyFromNote(renderParams.pitch_));
+            if (!renderParams.pitchRamp_.Enabled()) {
+                renderParams.pitchRamp_.Enable();
+            }
+            // trigger once to get rid of th clipping at the beginning
+            break;
+        }
         case PLOF:
         {
             // jumps to the position in the sample specified
@@ -64,6 +82,12 @@ void liptSampler::audioRequested( float* buffer, int numFrames, int numChannels 
 	for (int i = 0; i < numFrames; i++){
         struct InstrumentParams rup ;
         rup.volumeOffset_=0;
+        rup.speedOffset_=0;
+        if (renderParams.pitchRamp_.Enabled()) {
+            renderParams.pitchRamp_.Trigger(false);
+            renderParams.pitchRamp_.UpdateSRP(rup);
+            currentFrequency = rup.speedOffset_;
+        }
 		if(renderParams.volumeRamp_.Enabled()){
             renderParams.volumeRamp_.Trigger(false);
             renderParams.volumeRamp_.UpdateSRP(rup);
@@ -81,15 +105,17 @@ void liptSampler::audioRequested( float* buffer, int numFrames, int numChannels 
 	}
 
 }
+float liptSampler::frequencyFromNote(float note){
+    return pow(2.0, (note-60.0)/12.0f);
+}
 void liptSampler::setFrequencyMidiNote(float note){
-	currentFrequency = pow(2.0, (note-60.0)/12.0f);
+	currentFrequency = frequencyFromNote(note);
     // this is the sync to loop length calculation
     if(loopType == LOOPSYNC){
-
         float offset = 16.0 / currentFrequency; // multiplying by 16 because that is the number of ticks per measure currently, and then the octaves double or half the speed
         currentFrequency = sample->length/(Player::getInstance()->getTickSampleCount()*offset); 
-//        currentFrequency = currentFrequency*2.0;
     }
+    renderParams.pitch_ = note;
 }
 void liptSampler::setFrequencySyncToLength(int length){
 	currentFrequency = sample->length/(float)length;

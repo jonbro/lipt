@@ -7,7 +7,9 @@
 
 struct RUParams {
 	float volumeOffset_ ;
-} ;
+	float pitchOffset_ ;
+};
+
 enum loopModes{
     SINGLE,
     LOOP,
@@ -15,7 +17,9 @@ enum loopModes{
 };
 struct RenderParams{
     VolumeRamp  volumeRamp_;
-    float       volume_;    
+    float       volume_;
+    PitchRamp   pitchRamp_;
+    float       pitch_;
 };
 
 class liptSampler : public ofxSynth {
@@ -42,7 +46,7 @@ class liptSampler : public ofxSynth {
 		virtual void		audioRequested( float* buffer, int numFrames, int numChannels );
 		double				play4(double frequency, double start, double end);
 		void				play(float frequency, float start, float end, float &fill);
-
+        float               frequencyFromNote(float note);
 	private:
 		int					sampleRate, direction, loopType;
 		float				inPoint, outPoint, inSample, outSample;
