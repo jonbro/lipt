@@ -15,6 +15,15 @@ ProjectEditor = class(Group, function(o, root)
 		o.song:setTempo(newVal)
 	end
 
+	o.save = o:add(RoundedButton(0,120, 120, 80, "Save"))
+	-- should attempt to load the tempo from the song
+	o.save.scrollFactor = Vec2(0,0)
+	o.save:setLayer(2)
+	o.save.onPress = function()
+	  local songdata = o.song:saveTo({})
+	  persistence.store(blud.doc_root .. "/songdata.lua", songdata);
+	end
+
 	o.toSong = o:add(RoundedButton(bludG.camera.w-80, 0, 80, 80, "Sng"))
 	o.toSong.scrollFactor = Vec2(0,0)
 	o.toSong.onPress = function()
