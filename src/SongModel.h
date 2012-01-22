@@ -52,54 +52,12 @@ class PhraseModel{
 public:
 	static const char className[];
 	static Lunar<PhraseModel>::RegType methods[];
-	PhraseModel(lua_State *L){
-	}
-	PhraseModel(){
-        // setup all of the items so that we can access them from lua later
-        for (int i=0; i<16; i++) {
-            hasNote[i] = false;
-            hasInst[i] = false;
-            col1[i].hasEffect = false;
-            col2[i].hasEffect = false;
-        }        
-	}
-    int set(lua_State *L){
-        int step = luaL_checkinteger(L, 1);
-        this->hasNote[step] = true;
-        this->hasInst[step] = true;
-        this->note[step] = luaL_checkinteger(L, 2);
-        this->inst[step] = luaL_checkinteger(L, 3);
-        return 1;
-    }
-    int clearNote(lua_State *L){
-        int step = luaL_checkinteger(L, 1);
-        this->hasNote[step] = false;
-        return 1;
-    }
-    int setEffect(lua_State *L){
-        int step = luaL_checkinteger(L, 1);
-        int col = luaL_checkinteger(L, 2);
-        Effect *efx = &col1[step];
-        if(col == 2){
-            efx = &col2[step];
-        }
-        efx->hasEffect = true;
-        cout << "setting effect type: " << luaL_checkinteger(L, 3)-1 << endl;
-        efx->etype = (EffectType)(luaL_checkinteger(L, 3)-1);
-        efx->val1 = luaL_checkinteger(L, 4);
-        efx->val2 = luaL_checkinteger(L, 5);
-        return 1;
-    };
-    int removeEffect(lua_State *L){
-        int step = luaL_checkinteger(L, 1);
-        int col = luaL_checkinteger(L, 2);
-        Effect *efx = &col1[step];
-        if(col == 2){
-            efx = &col2[step];
-        }
-        efx->hasEffect = false;
-        return 1;
-    };
+	PhraseModel(lua_State *L);
+	PhraseModel();
+    int set(lua_State *L);
+    int clearNote(lua_State *L);
+    int setEffect(lua_State *L);
+    int removeEffect(lua_State *L);
     
     ~PhraseModel(){
 	}
@@ -123,8 +81,6 @@ public:
         sample.load(luaL_checkstring(L, 1));
         return 1;
     }
-    ~SampleData(){
-	}
     ofxSynthSample sample;
 };
 

@@ -18,6 +18,8 @@ public:
     void    moveToNextPhrase(int channel,int hop=-1);
     void    moveToNextChain(int channel,int hop=-1);
     
+    void    previewSample(ofxSynthSample &sample);
+    
     void    tick();
     void    startAll(int step);
     void    startChan(int chan, int step);
@@ -38,6 +40,10 @@ private:
     bool hasSong;
     liptSampler channels[NUM_CHANNELS]; // the synthesizers
     ofSoundMixer *mixer;
+    
+    liptSampler preview;
+    ofxSynthSample *previewSampleData;
+    bool        hasPreviewSample;
     
     int songStep[NUM_CHANNELS]; // where in the song each channel is
     int currentChain[NUM_CHANNELS]; // the currently playing chain for each channel... incase things get deleted while playing
@@ -66,6 +72,10 @@ public:
         p->setSong(Lunar<SongModel>::check(L, 1));
         return 1;
     };
+    int preview(lua_State *L){
+        p->previewSample(Lunar<SampleData>::check(L, 1)->sample);
+        return 1;
+    }
     int startChan(lua_State *L){
         p->startChan(luaL_checknumber(L, 1), luaL_checknumber(L, 2));
         return 1;

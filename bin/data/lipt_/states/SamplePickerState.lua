@@ -90,6 +90,15 @@ function SamplePickerState:loadDirList(instrument, directoryStack)
 		startPos = startPos + fHeight
 		if not fs:isDirectory(file) then
         	function fbutton:onPress()
+        		previewSample = SampleData()
+				fs:loadSample(file, previewSample)
+   				player:preview(previewSample);
+        	end
+        	-- add a load button
+        	local loadButton = self.fileList:add(RoundedButton(bludG.camera.w-80, startPos-fHeight, 60, 60, "LD"))
+        	loadButton:setLayer(2)
+
+        	function loadButton:onPress()
         		-- load the sample in the instrument and jump back to the instrument screen
         		-- TODO: get the jumping back to the instrument
    				instrument:setSample(file)

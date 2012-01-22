@@ -98,6 +98,7 @@ int PFileSystem::loadSample(lua_State *L){
     
     s->sample.myData = (char *)dataBuffer.mBuffers[0].mData;
     s->sample.length = inputFileLengthInFrames;
+    s->sample.hasData = false;
     return 1;
 }
 

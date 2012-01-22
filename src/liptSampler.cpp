@@ -64,13 +64,18 @@ void liptSampler::processEffect(EffectType effect, int val1, int val2){
 void liptSampler::trigger(){
     
     // should clear all of the currently running effects
-    renderParams.volume_ = 1.0;
+    renderParams.volume_ = renderParams.baseVolume_;
     renderParams.volumeRamp_.Disable();
+    renderParams.pitchRamp_.Disable();
     
     if (sampleLoaded) {
         position = inPoint*sample->length;
         playing = true;
     }
+    
+}
+void liptSampler::stop(){
+    playing = false;
 }
 void liptSampler::audioRequested( float* buffer, int numFrames, int numChannels ){
     if(!sampleLoaded)

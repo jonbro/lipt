@@ -20,6 +20,7 @@ struct RenderParams{
     float       volume_;
     PitchRamp   pitchRamp_;
     float       pitch_;
+    float       baseVolume_;
 };
 
 class liptSampler : public ofxSynth {
@@ -27,6 +28,7 @@ class liptSampler : public ofxSynth {
 		liptSampler()	{
 			direction=1; inPoint=0.0;outPoint=1.0;playing=false;
 			sampleLoaded=false; currentFrequency=1.0; loopType=SINGLE;
+            renderParams.baseVolume_ = 0.5;
 		};
 		virtual string		getName() { return "ofxSynthSampler"; }
 
@@ -34,6 +36,7 @@ class liptSampler : public ofxSynth {
         void                loadSample(ofxSynthSample *_sample);
     
 		void				trigger();
+        void				stop();
 		void				setFrequencyMidiNote(float note);
 		void				setFrequencySyncToLength(int length);
         void                processEffect(EffectType effect, int val1, int val2);

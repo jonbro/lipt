@@ -7,6 +7,7 @@ Lunar<tPlayer>::RegType tPlayer::methods[] = {
 	method(tPlayer,startChan),
     method(tPlayer, setTempo),
     method(tPlayer, render),
+    method(tPlayer, preview),
 	{0,0}
 };
 
@@ -23,6 +24,9 @@ Player::Player(){
         // setup the samplers
         mixer->addInputFrom(&channels[i]);
     }
+    mixer->addInputFrom(&preview);
+    hasPreviewSample = false;
+    
     samplesPerTick = 4000;
     sampleRate = 44100;
 }
@@ -33,6 +37,19 @@ Player* Player::getInstance(){
 		// connect this input to the mixer so that we can get triggers properly
 	}
 	return instance;
+}
+void Player::previewSample(ofxSynthSample &sample){
+    if(hasPreviewSample){
+        preview.stop();
+    }
+    hasPreviewSample = true;
+    // start playing the preview sample
+    preview.loadSample(&sample);
+    // play and stop
+    preview.setLoopType(0);
+    preview.setFrequencyMidiNote(60);
+    preview.trigger();
+    
 }
 
 void Player::tick(){
